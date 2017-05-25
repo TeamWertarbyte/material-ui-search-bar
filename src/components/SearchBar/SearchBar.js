@@ -20,7 +20,10 @@ const styles = {
     width: '100%'
   }
 }
-
+/**
+ * Material design search bar
+ * @see [Search patterns](https://material.io/guidelines/patterns/search.html)
+ */
 export default class SearchBar extends Component {
   constructor (props) {
     super(props)
