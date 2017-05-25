@@ -1,0 +1,56 @@
+{
+  "name": "material-ui-search-bar",
+  "version": "0.0.0",
+  "description": "Material style search bar",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src -d lib",
+    "prepublish": "babel src -d lib",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
+    "publish-docs": "npm run styleguide:build && npm run gh-pages",
+    "gh-pages": "./node_modules/.bin/gh-pages -d styleguide"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamWertarbyte/material-ui-search-bar.git"
+  },
+  "keywords": [
+    "react",
+    "material",
+    "material-design",
+    "material-ui",
+    "search",
+    "react-component"
+  ],
+  "author": "Wertarbyte <kontakt@wertarbyte.com> (https://wertarbyte.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TeamWertarbyte/material-ui-search-bar/issues"
+  },
+  "homepage": "https://github.com/TeamWertarbyte/material-ui-search-bar#readme",
+  "devDependencies": {
+    "@webpack-blocks/babel6": "^0.4.1",
+    "@webpack-blocks/postcss": "^0.4.3",
+    "@webpack-blocks/webpack2": "^0.4.0",
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.8.0",
+    "babel-plugin-material-ui": "^0.3.1",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "gh-pages": "^1.0.0",
+    "material-ui": "^0.18.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-styleguidist": "^5.2.1",
+    "react-tap-event-plugin": "^2.0.1"
+  },
+  "peerDependencies": {
+    "material-ui": "<1.0.0",
+    "react": "^15.5.4"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.8"
+  }
+}
