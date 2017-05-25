@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { IconButton, Paper, TextField } from 'material-ui'
 import SearchIcon from 'material-ui/svg-icons/action/search'
-import CancelIcon from 'material-ui/svg-icons/navigation/cancel'
+import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import { colors } from 'material-ui/styles'
 
 const styles = {
@@ -103,7 +103,7 @@ export default class SearchBar extends Component {
             transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
           }}
         >
-          <CancelIcon color={colors.blue500} />
+          <CloseIcon color={colors.grey500} />
         </IconButton>
       </Paper>
     )
@@ -112,7 +112,7 @@ export default class SearchBar extends Component {
 
 SearchBar.defaultProps = {
   hintText: 'Search',
-  searchIcon: <SearchIcon color={colors.blue500} />
+  searchIcon: <SearchIcon color={colors.grey500} />
 }
 
 SearchBar.propTypes = {
