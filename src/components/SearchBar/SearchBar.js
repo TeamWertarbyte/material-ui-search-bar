@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { IconButton, Paper, TextField } from 'material-ui'
 import SearchIcon from 'material-ui/svg-icons/action/search'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
-import { colors } from 'material-ui/styles'
+import { grey500 } from 'material-ui/styles/colors'
 
 const styles = {
   root: {
@@ -104,7 +104,7 @@ export default class SearchBar extends Component {
             transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
           }}
         >
-          <CloseIcon color={colors.grey500} />
+          <CloseIcon color={grey500} />
         </IconButton>
       </Paper>
     )
@@ -113,14 +113,20 @@ export default class SearchBar extends Component {
 
 SearchBar.defaultProps = {
   hintText: 'Search',
-  searchIcon: <SearchIcon color={colors.grey500} />
+  searchIcon: <SearchIcon color={grey500} />
 }
 
 SearchBar.propTypes = {
+  /** Sets hintText for the embedded text field. */
   hintText: PropTypes.string,
+  /** Fired when the text value changes. */
   onChange: PropTypes.func.isRequired,
+  /** Fired when the search icon is clicked. */
   onRequestSearch: PropTypes.func.isRequired,
+  /** Override the search icon. */
   searchIcon: PropTypes.node,
+  /** Override the inline-styles of the root element. */
   style: PropTypes.object,
+  /** The value of the text field. */
   value: PropTypes.string
 }
