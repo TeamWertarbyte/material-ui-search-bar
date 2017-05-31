@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { IconButton, Paper, TextField } from 'material-ui'
+import { AutoComplete, IconButton, Paper } from 'material-ui'
 import SearchIcon from 'material-ui/svg-icons/action/search'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import { grey500 } from 'material-ui/styles/colors'
@@ -47,8 +47,8 @@ export default class SearchBar extends Component {
   }
 
   handleInput = (e) => {
-    this.setState({value: e.target.value})
-    this.props.onChange(e.target.value)
+    this.setState({value: e})
+    this.props.onChange(e)
   }
 
   handleCancel = () => {
@@ -69,15 +69,17 @@ export default class SearchBar extends Component {
         }}
       >
         <div style={styles.searchContainer}>
-          <TextField
+          <AutoComplete
             hintText={this.props.hintText}
             onBlur={this.handleBlur}
             value={value}
-            onChange={this.handleInput}
+            onUpdateInput={this.handleInput}
             onFocus={this.handleFocus}
+            fullWidth
             style={styles.input}
             underlineShow={false}
-          />
+            dataSource={this.props.dataSource}
+            dataSourceConfig={this.props.dataSourceConfig} />
         </div>
         <IconButton
           onTouchTap={this.props.onRequestSearch}
@@ -112,11 +114,17 @@ export default class SearchBar extends Component {
 }
 
 SearchBar.defaultProps = {
+  dataSource: [],
+  dataSourceConfig: {text: 'text', value: 'value'},
   hintText: 'Search',
   searchIcon: <SearchIcon color={grey500} />
 }
 
 SearchBar.propTypes = {
+  /** Array of strings or nodes used to populate the list. */
+  dataSource: PropTypes.array,
+  /** Config for objects list dataSource. */
+  dataSourceConfig: PropTypes.object,
   /** Sets hintText for the embedded text field. */
   hintText: PropTypes.string,
   /** Fired when the text value changes. */
