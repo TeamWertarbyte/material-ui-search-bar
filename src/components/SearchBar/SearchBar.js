@@ -72,7 +72,7 @@ export default class SearchBar extends Component {
           <AutoComplete
             hintText={this.props.hintText}
             onBlur={this.handleBlur}
-            value={value}
+            searchText={value}
             onUpdateInput={this.handleInput}
             onFocus={this.handleFocus}
             fullWidth
