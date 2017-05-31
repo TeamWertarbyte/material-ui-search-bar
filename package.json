@@ -43,7 +43,7 @@
     "material-ui": "^0.18.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-styleguidist": "^5.2.1",
+    "react-styleguidist": "^5.3.2",
     "react-tap-event-plugin": "^2.0.1"
   },
   "peerDependencies": {
