@@ -32,6 +32,9 @@ render() {
 ### SearchBar Properties
 |Name            |Type        |Default     |Description
 |----------------|------------|------------|--------------------------------
+|closeIcon       | `node` | `<CloseIcon color={grey500} />`           | Override the close icon.
+|dataSource     | `array` | `[]` | Array of strings or nodes used to populate the list.
+|dataSourceConfig     | `object` | | Config for objects list dataSource.
 |hintText       | `string`  | `Search`| Sets hintText for the embedded [TextField](http://www.material-ui.com/#/components/text-field).
 |onChange       | `function` |            | Fired when the text value changes.
 |onRequestSearch       | `function` |            | Fired when the search icon is clicked.

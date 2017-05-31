@@ -106,7 +106,7 @@ export default class SearchBar extends Component {
             transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
           }}
         >
-          <CloseIcon color={grey500} />
+          {this.props.closeIcon}
         </IconButton>
       </Paper>
     )
@@ -114,6 +114,7 @@ export default class SearchBar extends Component {
 }
 
 SearchBar.defaultProps = {
+  closeIcon: <CloseIcon color={grey500} />,
   dataSource: [],
   dataSourceConfig: {text: 'text', value: 'value'},
   hintText: 'Search',
@@ -121,6 +122,8 @@ SearchBar.defaultProps = {
 }
 
 SearchBar.propTypes = {
+  /** Override the close icon. */
+  closeIcon: PropTypes.node,
   /** Array of strings or nodes used to populate the list. */
   dataSource: PropTypes.array,
   /** Config for objects list dataSource. */
