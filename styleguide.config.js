@@ -12,5 +12,6 @@ webpackConfig.resolve.alias['rsg-components/Wrapper'] = path.join(__dirname, 'sr
 module.exports = {
   skipComponentsWithoutExample: true,
   components: 'src/components/**/[A-Z]*.js',
+  serverHost: 'localhost',
   webpackConfig
 }
