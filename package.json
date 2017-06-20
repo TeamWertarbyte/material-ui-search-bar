@@ -10,7 +10,16 @@
     "styleguide:build": "styleguidist build",
     "publish-docs": "npm run styleguide:build && npm run gh-pages",
     "gh-pages": "./node_modules/.bin/gh-pages -d styleguide",
-    "lint": "eslint --ignore-path .gitignore ."
+    "lint": "eslint --ignore-path .gitignore .",
+    "test": "npm run lint",
+    "format": "prettier --trailing-comma all --single-quote --write './*.js' './!(node_modules|lib|coverage|styleguide)/**/*.js'",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --trailing-comma all --single-quote --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",

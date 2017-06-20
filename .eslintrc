@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
+
+  "parser": "babel-eslint",
+
+  "rules": {
+    "max-len": [2, 160, 2],
+
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/styleguide/*.js"]}],
+
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "react/forbid-prop-types": [2, { "forbid": ["any"] }]
+  }
+}
