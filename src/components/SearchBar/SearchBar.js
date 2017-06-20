@@ -5,12 +5,10 @@ import SearchIcon from 'material-ui/svg-icons/action/search'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import { grey500 } from 'material-ui/styles/colors'
 
-const getStyles = (props, state, context) => {
+const getStyles = (props, state) => {
   const { disabled }  = props;
   const { value } = state;
   const nonEmpty = value ? 0 : value.length
-
-  console.log(context.muiTheme.textField);
 
   return {
     root: {
@@ -127,7 +125,7 @@ export default class SearchBar extends Component {
   }
 
   render () {
-    const styles = getStyles(this.props, this.state, this.context);
+    const styles = getStyles(this.props, this.state);
     const value = this.state.value
 
     return (
