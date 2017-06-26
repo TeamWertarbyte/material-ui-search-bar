@@ -14,29 +14,29 @@ const getStyles = (props, state) => {
     root: {
       height: 48,
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: 'space-between'
     },
     iconButtonClose: {
       style: {
         opacity: !disabled ? 0.54 : 0.38,
         transform: nonEmpty ? 'scale(1, 1)' : 'scale(0, 0)',
-        transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
+        transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
       },
       iconStyle: {
         opacity: nonEmpty ? 1 : 0,
-        transition: 'opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
+        transition: 'opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
       },
     },
     iconButtonSearch: {
       style: {
         opacity: !disabled ? 0.54 : 0.38,
         transform: nonEmpty ? 'scale(0, 0)' : 'scale(1, 1)',
-        transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
+        transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
         marginRight: -48,
       },
       iconStyle: {
         opacity: nonEmpty ? 0 : 1,
-        transition: 'opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
+        transition: 'opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
       },
     },
     input: {
@@ -44,8 +44,8 @@ const getStyles = (props, state) => {
     },
     searchContainer: {
       margin: 'auto 16px',
-      width: '100%',
-    },
+      width: '100%'
+    }
   }
 }
 
@@ -62,7 +62,7 @@ export default class SearchBar extends Component {
     searchIcon: <SearchIcon color={grey500} />,
     disabled: false,
     value: '',
-    style: null,
+    style: null
   }
 
   static propTypes = {
@@ -85,17 +85,17 @@ export default class SearchBar extends Component {
     /** The value of the text field. */
     value: PropTypes.string,
     /** Disables text field. */
-    disabled: PropTypes.bool,
+    disabled: PropTypes.bool
   }
 
   static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
+    muiTheme: PropTypes.object.isRequired
   }
 
   state = {
     focus: false,
     value: this.props.value,
-    active: false,
+    active: false
   }
 
   componentWillReceiveProps (nextProps) {
