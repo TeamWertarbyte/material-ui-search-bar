@@ -6,8 +6,8 @@ import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import { grey500 } from 'material-ui/styles/colors'
 
 const getStyles = (props, state) => {
-  const { disabled } = props
-  const { value } = state
+  const {disabled} = props
+  const {value} = state
   const nonEmpty = value ? 0 : value.length
 
   return {
@@ -57,7 +57,7 @@ export default class SearchBar extends Component {
   static defaultProps = {
     closeIcon: <CloseIcon color={grey500} />,
     dataSource: [],
-    dataSourceConfig: { text: 'text', value: 'value' },
+    dataSourceConfig: {text: 'text', value: 'value'},
     hintText: 'Search',
     searchIcon: <SearchIcon color={grey500} />,
     disabled: false,
@@ -98,34 +98,34 @@ export default class SearchBar extends Component {
     active: false,
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (this.props.value !== nextProps.value) {
-      this.setState({ ...this.state, value: nextProps.value })
+      this.setState({...this.state, value: nextProps.value})
     }
   }
 
   handleFocus = () => {
-    this.setState({ focus: true })
+    this.setState({focus: true})
   }
 
   handleBlur = () => {
-    this.setState({ focus: false })
+    this.setState({focus: false})
     if (this.state.value.trim().length === 0) {
-      this.setState({ value: '' })
+      this.setState({value: ''})
     }
   }
 
   handleInput = e => {
-    this.setState({ value: e })
+    this.setState({value: e})
     this.props.onChange(e)
   }
 
   handleCancel = () => {
-    this.setState({ active: false, value: '' })
+    this.setState({active: false, value: ''})
     this.props.onChange('')
   }
 
-  render() {
+  render () {
     const styles = getStyles(this.props, this.state)
     const value = this.state.value
 
