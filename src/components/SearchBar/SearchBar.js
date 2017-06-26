@@ -25,7 +25,7 @@ const getStyles = (props, state) => {
       iconStyle: {
         opacity: nonEmpty ? 1 : 0,
         transition: 'opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
-      },
+      }
     },
     iconButtonSearch: {
       style: {
@@ -37,10 +37,10 @@ const getStyles = (props, state) => {
       iconStyle: {
         opacity: nonEmpty ? 0 : 1,
         transition: 'opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
-      },
+      }
     },
     input: {
-      width: '100%',
+      width: '100%'
     },
     searchContainer: {
       margin: 'auto 16px',
@@ -54,14 +54,13 @@ const getStyles = (props, state) => {
  * @see [Search patterns](https://material.io/guidelines/patterns/search.html)
  */
 export default class SearchBar extends Component {
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired
-  }
-
-  state = {
-    focus: false,
-    value: this.props.value,
-    active: false
+  constructor (props) {
+    super(props)
+    this.state = {
+      focus: false,
+      value: this.props.value,
+      active: false
+    }
   }
 
   componentWillReceiveProps (nextProps) {
@@ -70,23 +69,23 @@ export default class SearchBar extends Component {
     }
   }
 
-  handleFocus = () => {
+  handleFocus () {
     this.setState({focus: true})
   }
 
-  handleBlur = () => {
+  handleBlur () {
     this.setState({focus: false})
     if (this.state.value.trim().length === 0) {
       this.setState({value: ''})
     }
   }
 
-  handleInput = e => {
+  handleInput (e) {
     this.setState({value: e})
     this.props.onChange(e)
   }
 
-  handleCancel = () => {
+  handleCancel () {
     this.setState({active: false, value: ''})
     this.props.onChange('')
   }
@@ -99,7 +98,7 @@ export default class SearchBar extends Component {
       <Paper
         style={{
           ...styles.root,
-          ...this.props.style,
+          ...this.props.style
         }}
       >
         <div style={styles.searchContainer}>
