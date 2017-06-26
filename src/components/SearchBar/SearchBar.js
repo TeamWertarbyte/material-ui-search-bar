@@ -8,7 +8,7 @@ import { grey500 } from 'material-ui/styles/colors'
 const getStyles = (props, state) => {
   const {disabled} = props
   const {value} = state
-  const nonEmpty = value ? 0 : value.length
+  const nonEmpty = value.length > 0
 
   return {
     root: {
@@ -104,10 +104,10 @@ export default class SearchBar extends Component {
         <div style={styles.searchContainer}>
           <AutoComplete
             hintText={this.props.hintText}
-            onBlur={this.handleBlur}
+            onBlur={() => this.handleBlur()}
             searchText={value}
-            onUpdateInput={this.handleInput}
-            onFocus={this.handleFocus}
+            onUpdateInput={(e) => this.handleInput(e)}
+            onFocus={() => this.handleFocus()}
             fullWidth
             style={styles.input}
             underlineShow={false}
