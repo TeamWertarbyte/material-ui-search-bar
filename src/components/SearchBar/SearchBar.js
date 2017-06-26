@@ -127,7 +127,7 @@ export default class SearchBar extends Component {
 
   render () {
     const styles = getStyles(this.props, this.state)
-    const value = this.state.value
+    const {value} = this.state
 
     return (
       <Paper
