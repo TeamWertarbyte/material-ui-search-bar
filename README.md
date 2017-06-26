@@ -41,6 +41,7 @@ render() {
 |searchIcon       | `node` | `<SearchIcon color={grey500} />`           | Override the search icon.
 |style       | `object` |            | Override the inline-styles of the root element.
 |value       | `any` |            | The value of the text field.
+|disabled    | `boolean`| false   | Disables underlying autocomplete.
 
 \* required property
 
