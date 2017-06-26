@@ -264,7 +264,7 @@ aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
-babel-cli@^6.14.0:
+babel-cli@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-cli/-/babel-cli-6.24.1.tgz#207cd705bba61489b2ea41b5312341cf6aca2283"
   dependencies:
@@ -2975,9 +2975,9 @@ markdown-to-jsx@^5.3.3:
     remark-parse "^3.0.0"
     unified "^6.1.2"
 
-material-ui@^0.18.1:
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.18.1.tgz#1c8a47d7e930ff0b07064dd8633035984a5a3569"
+material-ui@^0.18.4:
+  version "0.18.4"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.18.4.tgz#afa0db1658d66b432ec0e0edb83727d65e6390a1"
   dependencies:
     babel-runtime "^6.23.0"
     inline-style-prefixer "^3.0.2"
@@ -3771,6 +3771,12 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
+prop-types@15.5.8:
+  version "15.5.8"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
+  dependencies:
+    fbjs "^0.8.9"
+
 prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
@@ -3930,9 +3936,21 @@ react-group@^1.0.4:
   dependencies:
     prop-types "^15.5.8"
 
-react-styleguidist@^5.3.2:
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-5.3.2.tgz#ba01cbf352d3d5f78b1d8360b5c4815faab2f27d"
+react-icon-base@2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/react-icon-base/-/react-icon-base-2.0.7.tgz#0bd18736bd6ce79ca6d69ce8387a07fb8d4ceffe"
+  dependencies:
+    prop-types "15.5.8"
+
+react-icons@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-2.2.5.tgz#f942501c21a4cc0456ce2bbee5032c93f6051dcf"
+  dependencies:
+    react-icon-base "2.0.7"
+
+react-styleguidist@^5.4.8:
+  version "5.4.8"
+  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-5.4.8.tgz#98ee7e020122d9139c1808bac016b4438af3cee2"
   dependencies:
     ast-types "^0.9.11"
     buble "^0.15.2"
@@ -3973,6 +3991,7 @@ react-styleguidist@^5.3.2:
     react-docgen "^2.15.0"
     react-docgen-displayname-handler "^1.0.0"
     react-group "^1.0.4"
+    react-icons "^2.2.5"
     remark "^7.0.1"
     semver-utils "^1.1.1"
     style-loader "^0.17.0"
