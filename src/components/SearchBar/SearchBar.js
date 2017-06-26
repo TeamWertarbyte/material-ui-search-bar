@@ -31,8 +31,8 @@ const getStyles = (props, state) => {
       style: {
         opacity: !disabled ? 0.54 : 0.38,
         transform: nonEmpty ? 'scale(0, 0)' : 'scale(1, 1)',
-        transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
-        marginRight: -48,
+        transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
+        marginRight: -48
       },
       iconStyle: {
         opacity: nonEmpty ? 0 : 1,
@@ -54,40 +54,6 @@ const getStyles = (props, state) => {
  * @see [Search patterns](https://material.io/guidelines/patterns/search.html)
  */
 export default class SearchBar extends Component {
-  static defaultProps = {
-    closeIcon: <CloseIcon color={grey500} />,
-    dataSource: [],
-    dataSourceConfig: {text: 'text', value: 'value'},
-    hintText: 'Search',
-    searchIcon: <SearchIcon color={grey500} />,
-    disabled: false,
-    value: '',
-    style: null
-  }
-
-  static propTypes = {
-    /** Override the close icon. */
-    closeIcon: PropTypes.node,
-    /** Array of strings or nodes used to populate the list. */
-    dataSource: PropTypes.array,
-    /** Config for objects list dataSource. */
-    dataSourceConfig: PropTypes.object,
-    /** Sets hintText for the embedded text field. */
-    hintText: PropTypes.string,
-    /** Fired when the text value changes. */
-    onChange: PropTypes.func.isRequired,
-    /** Fired when the search icon is clicked. */
-    onRequestSearch: PropTypes.func.isRequired,
-    /** Override the search icon. */
-    searchIcon: PropTypes.node,
-    /** Override the inline-styles of the root element. */
-    style: PropTypes.object,
-    /** The value of the text field. */
-    value: PropTypes.string,
-    /** Disables text field. */
-    disabled: PropTypes.bool
-  }
-
   static contextTypes = {
     muiTheme: PropTypes.object.isRequired
   }
@@ -170,4 +136,38 @@ export default class SearchBar extends Component {
       </Paper>
     )
   }
+}
+
+SearchBar.defaultProps = {
+  closeIcon: <CloseIcon color={grey500} />,
+  dataSource: [],
+  dataSourceConfig: {text: 'text', value: 'value'},
+  disabled: false,
+  hintText: 'Search',
+  searchIcon: <SearchIcon color={grey500} />,
+  style: null,
+  value: ''
+}
+
+SearchBar.propTypes = {
+  /** Override the close icon. */
+  closeIcon: PropTypes.node,
+  /** Array of strings or nodes used to populate the list. */
+  dataSource: PropTypes.array,
+  /** Config for objects list dataSource. */
+  dataSourceConfig: PropTypes.object,
+  /** Disables text field. */
+  disabled: PropTypes.bool,
+  /** Sets hintText for the embedded text field. */
+  hintText: PropTypes.string,
+  /** Fired when the text value changes. */
+  onChange: PropTypes.func.isRequired,
+  /** Fired when the search icon is clicked. */
+  onRequestSearch: PropTypes.func.isRequired,
+  /** Override the search icon. */
+  searchIcon: PropTypes.node,
+  /** Override the inline-styles of the root element. */
+  style: PropTypes.object,
+  /** The value of the text field. */
+  value: PropTypes.string
 }
