@@ -125,7 +125,7 @@ export default class SearchBar extends Component {
           {this.props.searchIcon}
         </IconButton>
         <IconButton
-          onTouchTap={this.handleCancel}
+          onTouchTap={() => this.handleCancel()}
           iconStyle={styles.iconButtonClose.iconStyle}
           style={styles.iconButtonClose.style}
           disabled={this.props.disabled}
