@@ -90,6 +90,12 @@ export default class SearchBar extends Component {
     this.props.onChange('')
   }
 
+  handleKeyPressed (e) {
+    if (e.charCode === 13) {
+      this.props.onRequestSearch()
+    }
+  }
+
   render () {
     const styles = getStyles(this.props, this.state)
     const {value} = this.state
@@ -107,6 +113,7 @@ export default class SearchBar extends Component {
             onBlur={() => this.handleBlur()}
             searchText={value}
             onUpdateInput={(e) => this.handleInput(e)}
+            onKeyPress={(e) => this.handleKeyPressed(e)}
             onFocus={() => this.handleFocus()}
             fullWidth
             style={styles.input}
