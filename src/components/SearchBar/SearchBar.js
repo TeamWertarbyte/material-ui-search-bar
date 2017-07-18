@@ -99,17 +99,24 @@ export default class SearchBar extends Component {
   render () {
     const styles = getStyles(this.props, this.state)
     const {value} = this.state
+    const {
+      closeIcon,
+      disabled,
+      onRequestSearch,
+      searchIcon,
+      style,
+      ...inputProps
+    } = this.props
 
     return (
       <Paper
         style={{
           ...styles.root,
-          ...this.props.style
+          ...style
         }}
       >
         <div style={styles.searchContainer}>
           <AutoComplete
-            hintText={this.props.hintText}
             onBlur={() => this.handleBlur()}
             searchText={value}
             onUpdateInput={(e) => this.handleInput(e)}
@@ -118,26 +125,25 @@ export default class SearchBar extends Component {
             fullWidth
             style={styles.input}
             underlineShow={false}
-            dataSource={this.props.dataSource}
-            dataSourceConfig={this.props.dataSourceConfig}
-            disabled={this.props.disabled}
+            disabled={disabled}
+            {...inputProps}
           />
         </div>
         <IconButton
-          onTouchTap={this.props.onRequestSearch}
+          onTouchTap={onRequestSearch}
           iconStyle={styles.iconButtonSearch.iconStyle}
           style={styles.iconButtonSearch.style}
-          disabled={this.props.disabled}
+          disabled={disabled}
         >
-          {this.props.searchIcon}
+          {searchIcon}
         </IconButton>
         <IconButton
           onTouchTap={() => this.handleCancel()}
           iconStyle={styles.iconButtonClose.iconStyle}
           style={styles.iconButtonClose.style}
-          disabled={this.props.disabled}
+          disabled={disabled}
         >
-          {this.props.closeIcon}
+          {closeIcon}
         </IconButton>
       </Paper>
     )
