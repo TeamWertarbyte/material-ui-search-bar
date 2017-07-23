@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { AutoComplete, IconButton, Paper } from 'material-ui'
-import SearchIcon from 'material-ui/svg-icons/action/search'
-import CloseIcon from 'material-ui/svg-icons/navigation/close'
-import { grey500 } from 'material-ui/styles/colors'
+import IconButton from 'material-ui/IconButton'
+import Input from 'material-ui/Input'
+import Paper from 'material-ui/Paper'
+import ClearIcon from 'material-ui-icons/Clear'
+import SearchIcon from 'material-ui-icons/Search'
+import { grey } from 'material-ui/colors'
 
 const getStyles = (props, state) => {
   const {disabled} = props
@@ -81,18 +83,18 @@ export default class SearchBar extends Component {
   }
 
   handleInput (e) {
-    this.setState({value: e})
-    this.props.onChange(e)
+    this.setState({value: e.target.value})
+    this.props.onChange && this.props.onChange(e.target.value)
   }
 
   handleCancel () {
     this.setState({active: false, value: ''})
-    this.props.onChange('')
+    this.props.onChange && this.props.onChange('')
   }
 
   handleKeyPressed (e) {
-    if (e.charCode === 13) {
-      this.props.onRequestSearch()
+    if (e.key === 'Enter') {
+      this.props.onRequestSearch(this.state.value)
     }
   }
 
@@ -116,34 +118,31 @@ export default class SearchBar extends Component {
         }}
       >
         <div style={styles.searchContainer}>
-          <AutoComplete
+          <Input
+            {...inputProps}
             onBlur={() => this.handleBlur()}
-            searchText={value}
-            onUpdateInput={(e) => this.handleInput(e)}
-            onKeyPress={(e) => this.handleKeyPressed(e)}
+            value={this.state.value}
+            onChange={(e) => this.handleInput(e)}
+            onKeyUp={(e) => this.handleKeyPressed(e)}
             onFocus={() => this.handleFocus()}
             fullWidth
             style={styles.input}
-            underlineShow={false}
+            disableUnderline={true}
             disabled={disabled}
-            {...inputProps}
           />
         </div>
         <IconButton
-          onTouchTap={onRequestSearch}
-          iconStyle={styles.iconButtonSearch.iconStyle}
           style={styles.iconButtonSearch.style}
           disabled={disabled}
         >
-          {searchIcon}
+          {React.cloneElement(searchIcon, { style: styles.iconButtonSearch.iconStyle })}
         </IconButton>
         <IconButton
           onTouchTap={() => this.handleCancel()}
-          iconStyle={styles.iconButtonClose.iconStyle}
           style={styles.iconButtonClose.style}
           disabled={disabled}
         >
-          {closeIcon}
+          {React.cloneElement(closeIcon, { style: styles.iconButtonClose.iconStyle })}
         </IconButton>
       </Paper>
     )
@@ -151,12 +150,10 @@ export default class SearchBar extends Component {
 }
 
 SearchBar.defaultProps = {
-  closeIcon: <CloseIcon color={grey500} />,
-  dataSource: [],
-  dataSourceConfig: {text: 'text', value: 'value'},
+  closeIcon: <ClearIcon color={grey[500]} />,
   disabled: false,
-  hintText: 'Search',
-  searchIcon: <SearchIcon color={grey500} />,
+  placeholder: 'Search',
+  searchIcon: <SearchIcon color={grey[500]} />,
   style: null,
   value: ''
 }
@@ -164,16 +161,12 @@ SearchBar.defaultProps = {
 SearchBar.propTypes = {
   /** Override the close icon. */
   closeIcon: PropTypes.node,
-  /** Array of strings or nodes used to populate the list. */
-  dataSource: PropTypes.array,
-  /** Config for objects list dataSource. */
-  dataSourceConfig: PropTypes.object,
   /** Disables text field. */
   disabled: PropTypes.bool,
-  /** Sets hintText for the embedded text field. */
-  hintText: PropTypes.string,
+  /** Sets placeholder for the embedded text field. */
+  placeholder: PropTypes.string,
   /** Fired when the text value changes. */
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   /** Fired when the search icon is clicked. */
   onRequestSearch: PropTypes.func.isRequired,
   /** Override the search icon. */
