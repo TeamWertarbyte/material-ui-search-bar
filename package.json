@@ -4,6 +4,7 @@
   "description": "Material style search bar",
   "main": "lib/index.js",
   "scripts": {
+    "test": "standard",
     "build": "babel src -d lib",
     "prepublish": "babel src -d lib",
     "styleguide": "styleguidist server",
@@ -43,7 +44,8 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-styleguidist": "^5.5.9",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "standard": "^10.0.2"
   },
   "peerDependencies": {
     "material-ui": "^1.0.0",

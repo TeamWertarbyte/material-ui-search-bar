@@ -93,18 +93,18 @@ export default class SearchBar extends Component {
   }
 
   handleKeyPressed (e) {
-    if (e.key === 'Enter') {
+    if (e.charCode === 13 || e.key === 'Enter') {
       this.props.onRequestSearch(this.state.value)
     }
   }
 
   render () {
     const styles = getStyles(this.props, this.state)
-    const {value} = this.state
+    const { value } = this.state
     const {
       closeIcon,
       disabled,
-      onRequestSearch,
+      onRequestSearch, // eslint-disable-line
       searchIcon,
       style,
       ...inputProps
@@ -121,13 +121,13 @@ export default class SearchBar extends Component {
           <Input
             {...inputProps}
             onBlur={() => this.handleBlur()}
-            value={this.state.value}
+            value={value}
             onChange={(e) => this.handleInput(e)}
             onKeyUp={(e) => this.handleKeyPressed(e)}
             onFocus={() => this.handleFocus()}
             fullWidth
             style={styles.input}
-            disableUnderline={true}
+            disableUnderline
             disabled={disabled}
           />
         </div>
