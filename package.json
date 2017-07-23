@@ -39,10 +39,10 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "gh-pages": "^1.0.0",
-    "material-ui": "next",
+    "material-ui": "^1.0.0-alpha.22",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-styleguidist": "5.4.8",
+    "react-styleguidist": "^5.5.9",
     "react-tap-event-plugin": "^2.0.1"
   },
   "peerDependencies": {
