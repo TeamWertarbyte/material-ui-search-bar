@@ -130,7 +130,7 @@ export default class SearchBar extends Component {
           />
         </div>
         <IconButton
-          onTouchTap={onRequestSearch}
+          onClick={onRequestSearch}
           iconStyle={styles.iconButtonSearch.iconStyle}
           style={styles.iconButtonSearch.style}
           disabled={disabled}
@@ -138,7 +138,7 @@ export default class SearchBar extends Component {
           {searchIcon}
         </IconButton>
         <IconButton
-          onTouchTap={() => this.handleCancel()}
+          onClick={() => this.handleCancel()}
           iconStyle={styles.iconButtonClose.iconStyle}
           style={styles.iconButtonClose.style}
           disabled={disabled}
