@@ -71,28 +71,28 @@ export default class SearchBar extends Component {
     }
   }
 
-  handleFocus () {
+  handleFocus = () => {
     this.setState({focus: true})
   }
 
-  handleBlur () {
+  handleBlur = () => {
     this.setState({focus: false})
     if (this.state.value.trim().length === 0) {
       this.setState({value: ''})
     }
   }
 
-  handleInput (e) {
+  handleInput = (e) => {
     this.setState({value: e.target.value})
     this.props.onChange && this.props.onChange(e.target.value)
   }
 
-  handleCancel () {
+  handleCancel = () => {
     this.setState({active: false, value: ''})
     this.props.onChange && this.props.onChange('')
   }
 
-  handleKeyPressed (e) {
+  handleKeyPressed = (e) => {
     if (e.charCode === 13 || e.key === 'Enter') {
       this.props.onRequestSearch(this.state.value)
     }
@@ -120,11 +120,11 @@ export default class SearchBar extends Component {
         <div style={styles.searchContainer}>
           <Input
             {...inputProps}
-            onBlur={() => this.handleBlur()}
+            onBlur={this.handleBlur}
             value={value}
-            onChange={(e) => this.handleInput(e)}
-            onKeyUp={(e) => this.handleKeyPressed(e)}
-            onFocus={() => this.handleFocus()}
+            onChange={this.handleInput}
+            onKeyUp={this.handleKeyPressed}
+            onFocus={this.handleFocus}
             fullWidth
             style={styles.input}
             disableUnderline
@@ -138,7 +138,7 @@ export default class SearchBar extends Component {
           {React.cloneElement(searchIcon, { style: styles.iconButtonSearch.iconStyle })}
         </IconButton>
         <IconButton
-          onTouchTap={() => this.handleCancel()}
+          onClick={this.handleCancel}
           style={styles.iconButtonClose.style}
           disabled={disabled}
         >

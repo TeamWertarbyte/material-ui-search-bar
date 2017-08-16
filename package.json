@@ -36,6 +36,7 @@
     "@webpack-blocks/webpack2": "^0.4.0",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.8.0",
+    "babel-eslint": "^7.2.3",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
@@ -44,7 +45,6 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-styleguidist": "^5.5.9",
-    "react-tap-event-plugin": "^2.0.1",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
@@ -54,5 +54,8 @@
   "dependencies": {
     "material-ui-icons": "^1.0.0-alpha.19",
     "prop-types": "^15.5.8"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }
