@@ -6,7 +6,7 @@ import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import { grey500 } from 'material-ui/styles/colors'
 
 const getStyles = (props, state) => {
-  const {disabled} = props
+  const {disabled, iconButtonStyle} = props
   const {value} = state
   const nonEmpty = value.length > 0
 
@@ -20,7 +20,8 @@ const getStyles = (props, state) => {
       style: {
         opacity: !disabled ? 0.54 : 0.38,
         transform: nonEmpty ? 'scale(1, 1)' : 'scale(0, 0)',
-        transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
+        transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
+        ...iconButtonStyle
       },
       iconStyle: {
         opacity: nonEmpty ? 1 : 0,
@@ -32,7 +33,8 @@ const getStyles = (props, state) => {
         opacity: !disabled ? 0.54 : 0.38,
         transform: nonEmpty ? 'scale(0, 0)' : 'scale(1, 1)',
         transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
-        marginRight: -48
+        marginRight: -48,
+        ...iconButtonStyle
       },
       iconStyle: {
         opacity: nonEmpty ? 0 : 1,
@@ -68,7 +70,7 @@ export default class SearchBar extends Component {
       this.setState({...this.state, value: nextProps.value})
     }
   }
-  
+
   /**
    * Focus the search field.
    * @public
@@ -76,7 +78,7 @@ export default class SearchBar extends Component {
   focus () {
     this.autoComplete.focus()
   }
-  
+
   /**
    * Blurs the search field.
    * @public
@@ -174,7 +176,6 @@ SearchBar.defaultProps = {
   disabled: false,
   hintText: 'Search',
   searchIcon: <SearchIcon color={grey500} />,
-  style: null,
   value: ''
 }
 
@@ -189,6 +190,8 @@ SearchBar.propTypes = {
   disabled: PropTypes.bool,
   /** Sets hintText for the embedded text field. */
   hintText: PropTypes.string,
+  /** Override the inline-styles of the button element. */
+  iconButtonStyle: PropTypes.object,
   /** Fired when the text value changes. */
   onChange: PropTypes.func.isRequired,
   /** Fired when the search icon is clicked. */

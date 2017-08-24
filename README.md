@@ -37,6 +37,7 @@ render() {
 |dataSource     | `array` | `[]` | Array of strings or nodes used to populate the list.
 |dataSourceConfig     | `object` | | Config for objects list dataSource.
 |hintText       | `string`  | `Search`| Sets hintText for the embedded [TextField](http://www.material-ui.com/#/components/text-field).
+|iconButtonStyle| `object ` | | Override the inline-styles of the button element.
 |onChange       | `function` |            | Fired when the text value changes.
 |onRequestSearch       | `function` |            | Fired when the search icon is clicked.
 |searchIcon       | `node` | `<SearchIcon color={grey500} />`           | Override the search icon.
