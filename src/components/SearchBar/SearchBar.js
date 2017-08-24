@@ -68,6 +68,22 @@ export default class SearchBar extends Component {
       this.setState({...this.state, value: nextProps.value})
     }
   }
+  
+  /**
+   * Focus the search field.
+   * @public
+   */
+  focus () {
+    this.autoComplete.focus()
+  }
+  
+  /**
+   * Blurs the search field.
+   * @public
+   */
+  blur () {
+    this.autoComplete.blur()
+  }
 
   handleFocus () {
     this.setState({focus: true})
@@ -117,6 +133,7 @@ export default class SearchBar extends Component {
       >
         <div style={styles.searchContainer}>
           <AutoComplete
+            ref={(ref) => { this.autoComplete = ref }}
             onBlur={() => this.handleBlur()}
             searchText={value}
             onUpdateInput={(e) => this.handleInput(e)}
