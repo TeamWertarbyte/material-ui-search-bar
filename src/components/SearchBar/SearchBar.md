@@ -9,7 +9,8 @@ SearchBar example:
       }}
     />
 ```
-SearchBar AutComplete example:
+
+SearchBar AutoComplete example:
 ```
     <SearchBar
       dataSource={state.dataSource}
