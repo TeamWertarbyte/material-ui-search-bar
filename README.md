@@ -41,6 +41,7 @@ render() {
 |onChange       | `function` |            | Fired when the text value changes.
 |onRequestSearch       | `function` |            | Fired when the search icon is clicked.
 |searchIcon       | `node` | `<SearchIcon color={grey500} />`           | Override the search icon.
+|spellCheck       | `bool` | `false`           | Specifies whether the element to have its spelling and grammar checked or not.
 |style       | `object` |            | Override the inline-styles of the root element.
 |value       | `any` |            | The value of the text field.
 |disabled    | `boolean`| false   | Disables underlying autocomplete.

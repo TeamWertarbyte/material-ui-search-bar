@@ -122,6 +122,7 @@ export default class SearchBar extends Component {
       disabled,
       onRequestSearch,
       searchIcon,
+      spellCheck,
       style,
       ...inputProps
     } = this.props
@@ -145,6 +146,7 @@ export default class SearchBar extends Component {
             style={styles.input}
             underlineShow={false}
             disabled={disabled}
+            spellCheck={spellCheck}
             {...inputProps}
           />
         </div>
@@ -176,6 +178,7 @@ SearchBar.defaultProps = {
   disabled: false,
   hintText: 'Search',
   searchIcon: <SearchIcon color={grey500} />,
+  spellCheck: false,
   value: ''
 }
 
@@ -198,6 +201,8 @@ SearchBar.propTypes = {
   onRequestSearch: PropTypes.func.isRequired,
   /** Override the search icon. */
   searchIcon: PropTypes.node,
+  /** Specifies whether the element to have its spelling and grammar checked or not. */
+  spellCheck: PropTypes.bool,
   /** Override the inline-styles of the root element. */
   style: PropTypes.object,
   /** The value of the text field. */
