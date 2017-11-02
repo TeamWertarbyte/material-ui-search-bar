@@ -42,14 +42,14 @@
     "babel-preset-stage-0": "^6.5.0",
     "gh-pages": "^1.0.0",
     "material-ui": "^1.0.0-beta.19",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-styleguidist": "^5.5.9",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-styleguidist": "^6.0.32",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
     "material-ui": "^1.0.0",
-    "react": "^15.5.4"
+    "react": "^16.0.0"
   },
   "dependencies": {
     "material-ui-icons": "^1.0.0-beta.17",
