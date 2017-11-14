@@ -3,10 +3,11 @@
   "version": "1.0.0-beta.3",
   "description": "Material style search bar",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "standard",
-    "build": "babel src -d lib",
-    "prepare": "babel src -d lib",
+    "build": "babel src -d lib --copy-files",
+    "prepare": "babel src -d lib --copy-files",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
     "publish-docs": "npm run styleguide:build && npm run gh-pages",
