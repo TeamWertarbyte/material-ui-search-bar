@@ -9,7 +9,7 @@ See this component in [action](https://teamwertarbyte.github.io/material-ui-sear
 
 ## Installation
 ```shell
-npm i --save material-ui-search-bar
+npm i --save material-ui-search-bar@beta
 ```
 
 ## Usage
