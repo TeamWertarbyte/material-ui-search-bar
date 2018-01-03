@@ -150,10 +150,10 @@ export default class SearchBar extends Component {
 }
 
 SearchBar.defaultProps = {
-  closeIcon: <ClearIcon color={grey[500]} />,
+  closeIcon: <ClearIcon style={{ color: grey[500] }} />,
   disabled: false,
   placeholder: 'Search',
-  searchIcon: <SearchIcon color={grey[500]} />,
+  searchIcon: <SearchIcon style={{ color: grey[500] }} />,
   style: null,
   value: ''
 }
