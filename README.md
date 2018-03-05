@@ -5,11 +5,18 @@
 
 ![Example](demo.gif)
 
-See this component in [action](https://teamwertarbyte.github.io/material-ui-search-bar/)
+See this component in [action](https://mui.wertarbyte.com/#material-ui-search-bar)
 
 ## Installation
-```shell
+
+**Stable channel**
+```sh
 npm i --save material-ui-search-bar
+```
+
+**Pre-release channel**
+```sh
+npm install material-ui-search-bar@beta
 ```
 
 ## Usage
