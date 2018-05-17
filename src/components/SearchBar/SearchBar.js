@@ -6,48 +6,42 @@ import Paper from '@material-ui/core/Paper'
 import ClearIcon from '@material-ui/icons/Clear'
 import SearchIcon from '@material-ui/icons/Search'
 import { grey } from '@material-ui/core/colors'
+import withStyles from '@material-ui/core/styles/withStyles'
+import classNames from 'classnames'
 
-const getStyles = (props, state) => {
-  const {disabled} = props
-  const {value} = state
-  const nonEmpty = value.length > 0
-
-  return {
-    root: {
-      height: 48,
-      display: 'flex',
-      justifyContent: 'space-between'
-    },
-    iconButtonClose: {
-      style: {
-        opacity: !disabled ? 0.54 : 0.38,
-        transform: nonEmpty ? 'scale(1, 1)' : 'scale(0, 0)',
-        transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
-      },
-      iconStyle: {
-        opacity: nonEmpty ? 1 : 0,
-        transition: 'opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
-      }
-    },
-    iconButtonSearch: {
-      style: {
-        opacity: !disabled ? 0.54 : 0.38,
-        transform: nonEmpty ? 'scale(0, 0)' : 'scale(1, 1)',
-        transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
-        marginRight: -48
-      },
-      iconStyle: {
-        opacity: nonEmpty ? 0 : 1,
-        transition: 'opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
-      }
-    },
-    input: {
-      width: '100%'
-    },
-    searchContainer: {
-      margin: 'auto 16px',
-      width: '100%'
+const styles = {
+  root: {
+    height: 48,
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  iconButton: {
+    opacity: 0.54,
+    transform: 'scale(1, 1)',
+    transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
+  },
+  iconButtonHidden: {
+    transform: 'scale(0, 0)',
+    '& > $icon': {
+      opacity: 0
     }
+  },
+  iconButtonDisabled: {
+    opacity: 0.38
+  },
+  searchIconButton: {
+    marginRight: -48
+  },
+  icon: {
+    opacity: 0.54,
+    transition: 'opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
+  },
+  input: {
+    width: '100%'
+  },
+  searchContainer: {
+    margin: 'auto 16px',
+    width: '100%'
   }
 }
 
@@ -55,7 +49,7 @@ const getStyles = (props, state) => {
  * Material design search bar
  * @see [Search patterns](https://material.io/guidelines/patterns/search.html)
  */
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -110,9 +104,9 @@ export default class SearchBar extends Component {
   }
 
   render () {
-    const styles = getStyles(this.props, this.state)
     const { value } = this.state
     const {
+      classes,
       closeIcon,
       disabled,
       onRequestSearch, // eslint-disable-line
@@ -123,12 +117,10 @@ export default class SearchBar extends Component {
 
     return (
       <Paper
-        style={{
-          ...styles.root,
-          ...style
-        }}
+        className={classes.root}
+        style={style}
       >
-        <div style={styles.searchContainer}>
+        <div className={classes.searchContainer}>
           <Input
             {...inputProps}
             onBlur={this.handleBlur}
@@ -137,23 +129,37 @@ export default class SearchBar extends Component {
             onKeyUp={this.handleKeyUp}
             onFocus={this.handleFocus}
             fullWidth
-            style={styles.input}
+            className={classes.input}
             disableUnderline
             disabled={disabled}
           />
         </div>
         <IconButton
-          style={styles.iconButtonSearch.style}
+          classes={{
+            root: classNames(classes.iconButton, classes.searchIconButton, {
+              [classes.iconButtonHidden]: value !== ''
+            }),
+            disabled: classes.iconButtonDisabled
+          }}
           disabled={disabled}
         >
-          {React.cloneElement(searchIcon, { style: styles.iconButtonSearch.iconStyle })}
+          {React.cloneElement(searchIcon, {
+            classes: { root: classes.icon }
+          })}
         </IconButton>
         <IconButton
           onClick={this.handleCancel}
-          style={styles.iconButtonClose.style}
+          classes={{
+            root: classNames(classes.iconButton, {
+              [classes.iconButtonHidden]: value === ''
+            }),
+            disabled: classes.iconButtonDisabled
+          }}
           disabled={disabled}
         >
-          {React.cloneElement(closeIcon, { style: styles.iconButtonClose.iconStyle })}
+          {React.cloneElement(closeIcon, {
+            classes: { root: classes.icon }
+          })}
         </IconButton>
       </Paper>
     )
@@ -187,3 +193,5 @@ SearchBar.propTypes = {
   /** The value of the text field. */
   value: PropTypes.string
 }
+
+export default withStyles(styles)(SearchBar)

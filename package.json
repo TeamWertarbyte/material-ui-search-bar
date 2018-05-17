@@ -43,10 +43,10 @@
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
-    "gh-pages": "^1.0.0",
+    "gh-pages": "^1.1.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-styleguidist": "^6.0.32",
+    "react-styleguidist": "^7.0.14",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "@material-ui/icons": "^1.0.0-rc.0",
+    "classnames": "^2.2.5",
     "prop-types": "^15.5.8"
   },
   "standard": {
