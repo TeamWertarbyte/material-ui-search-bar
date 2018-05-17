@@ -87,30 +87,39 @@ export default class SearchBar extends Component {
     this.autoComplete.blur()
   }
 
-  handleFocus () {
+  handleFocus = (e) => {
     this.setState({focus: true})
+    if (this.props.onFocus) {
+      this.props.onFocus(e)
+    }
   }
 
-  handleBlur () {
+  handleBlur = (e) => {
     this.setState({focus: false})
     if (this.state.value.trim().length === 0) {
       this.setState({value: ''})
     }
+    if (this.props.onBlur) {
+      this.props.onBlur(e)
+    }
   }
 
-  handleInput (e) {
+  handleInput = (e) => {
     this.setState({value: e})
     this.props.onChange(e)
   }
 
-  handleCancel () {
+  handleCancel = () => {
     this.setState({active: false, value: ''})
     this.props.onChange('')
   }
 
-  handleKeyPressed (e) {
+  handleKeyPressed = (e) => {
     if (e.charCode === 13) {
       this.props.onRequestSearch()
+    }
+    if (this.props.onKeyPress) {
+      this.props.onKeyPress(e)
     }
   }
 
@@ -137,11 +146,11 @@ export default class SearchBar extends Component {
         <div style={styles.searchContainer}>
           <AutoComplete
             ref={(ref) => { this.autoComplete = ref }}
-            onBlur={() => this.handleBlur()}
+            onBlur={this.handleBlur}
             searchText={value}
-            onUpdateInput={(e) => this.handleInput(e)}
-            onKeyPress={(e) => this.handleKeyPressed(e)}
-            onFocus={() => this.handleFocus()}
+            onUpdateInput={this.handleInput}
+            onKeyPress={this.handleKeyPressed}
+            onFocus={this.handleFocus}
             fullWidth
             style={styles.input}
             underlineShow={false}
@@ -159,7 +168,7 @@ export default class SearchBar extends Component {
           {searchIcon}
         </IconButton>
         <IconButton
-          onClick={() => this.handleCancel()}
+          onClick={this.handleCancel}
           iconStyle={styles.iconButtonClose.iconStyle}
           style={styles.iconButtonClose.style}
           disabled={disabled}
