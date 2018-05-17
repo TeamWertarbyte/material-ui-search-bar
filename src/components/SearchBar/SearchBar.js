@@ -176,6 +176,8 @@ SearchBar.defaultProps = {
 }
 
 SearchBar.propTypes = {
+  /** Override or extend the styles applied to the component. */
+  classes: PropTypes.object.isRequired,
   /** Override the close icon. */
   closeIcon: PropTypes.node,
   /** Disables text field. */

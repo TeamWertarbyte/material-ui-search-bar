@@ -33,6 +33,7 @@ render() {
 ### SearchBar Properties
 |Name            |Type        |Default     |Description
 |----------------|------------|------------|--------------------------------
+|classes         | `object` | | Override or extend the styles applied to the component.
 |closeIcon       | `node` | `<CloseIcon color={grey500} />`           | Override the close icon.
 |dataSource     | `array` | `[]` | Array of strings or nodes used to populate the list.
 |dataSourceConfig     | `object` | | Config for objects list dataSource.
