@@ -106,6 +106,7 @@ class SearchBar extends Component {
   render () {
     const { value } = this.state
     const {
+      className,
       classes,
       closeIcon,
       disabled,
@@ -117,7 +118,7 @@ class SearchBar extends Component {
 
     return (
       <Paper
-        className={classes.root}
+        className={classNames(classes.root, className)}
         style={style}
       >
         <div className={classes.searchContainer}>
@@ -167,6 +168,7 @@ class SearchBar extends Component {
 }
 
 SearchBar.defaultProps = {
+  className: '',
   closeIcon: <ClearIcon style={{ color: grey[500] }} />,
   disabled: false,
   placeholder: 'Search',
@@ -176,6 +178,8 @@ SearchBar.defaultProps = {
 }
 
 SearchBar.propTypes = {
+  /** Custom top-level class */
+  className: PropTypes.string,
   /** Override or extend the styles applied to the component. */
   classes: PropTypes.object.isRequired,
   /** Override the close icon. */
