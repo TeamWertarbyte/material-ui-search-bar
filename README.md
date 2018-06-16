@@ -1,7 +1,6 @@
 # Material Search Bar
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Build Status](https://travis-ci.org/TeamWertarbyte/material-ui-search-bar.svg?branch=master)](https://travis-ci.org/TeamWertarbyte/material-ui-search-bar)
-[![Greenkeeper badge](https://badges.greenkeeper.io/TeamWertarbyte/material-ui-search-bar.svg)](https://greenkeeper.io/)
 
 ![Example](demo.gif)
 
