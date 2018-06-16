@@ -13,23 +13,23 @@ npm i --save material-ui-search-bar@beta
 ```
 
 ## Usage
+
+The `SearchBar` is a _controlled input_, meaning that _you_ need to keep the input state. This allows for much flexibility, e.g. you can change and clear the search input just by changing its props.
+
 ```js
 import SearchBar from 'material-ui-search-bar'
+// *snip*
 
-// ...
-render() {
-  return(
-    <SearchBar
-      onChange={() => console.log('onChange')}
-      onRequestSearch={() => console.log('onRequestSearch')}
-      style={{
-        margin: '0 auto',
-        maxWidth: 800
-      }}
-    />
-  )
-}
+return (
+  <SearchBar
+    value={this.state.value}
+    onChange={(newValue) => this.setState({ value: newValue })}
+    onRequestSearch={() => doSomethingWith(this.state.value)}
+  />
+)
 ```
+
+
 ### SearchBar Properties
 |Name            |Type        |Default     |Description
 |----------------|------------|------------|--------------------------------
