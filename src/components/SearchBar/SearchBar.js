@@ -97,6 +97,8 @@ class SearchBar extends Component {
   handleKeyUp = (e) => {
     if (e.charCode === 13 || e.key === 'Enter') {
       this.props.onRequestSearch(this.state.value)
+    } else if (this.props.cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
+      this.handleCancel()
     }
     if (this.props.onKeyUp) {
       this.props.onKeyUp(e)
@@ -197,7 +199,9 @@ SearchBar.propTypes = {
   /** Override the inline-styles of the root element. */
   style: PropTypes.object,
   /** The value of the text field. */
-  value: PropTypes.string
+  value: PropTypes.string,
+  /** Whether to clear search on escape */
+  cancelOnEscape: PropTypes.bool
 }
 
 export default withStyles(styles)(SearchBar)
