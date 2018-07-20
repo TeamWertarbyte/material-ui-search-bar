@@ -188,7 +188,7 @@ SearchBar.propTypes = {
   closeIcon: PropTypes.node,
   /** Disables text field. */
   disabled: PropTypes.bool,
-  /** Sets placeholder for the embedded text field. */
+  /** Sets placeholder text for the embedded text field. */
   placeholder: PropTypes.string,
   /** Fired when the text value changes. */
   onChange: PropTypes.func,
