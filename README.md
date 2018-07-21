@@ -30,19 +30,19 @@ return (
 
 
 ### SearchBar Properties
-|Name            |Type        |Default     |Description
-|----------------|------------|------------|--------------------------------
-|classes         | `object` | | Override or extend the styles applied to the component.
-|closeIcon       | `node` | `<CloseIcon color={grey500} />`           | Override the close icon.
-|dataSource     | `array` | `[]` | Array of strings or nodes used to populate the list. (See [AutoComplete](https://material-ui.com/demos/autocomplete/))
-|dataSourceConfig     | `object` | | Config for objects list dataSource.
-|placeholder       | `string`  | `Search`| Sets placholder text for the embedded [TextField](http://www.material-ui.com/#/components/text-field).
-|onChange       | `function` |            | Fired when the text value changes.
-|onRequestSearch       | `function` |            | Fired when the search icon is clicked.
-|searchIcon       | `node` | `<SearchIcon color={grey500} />`           | Override the search icon.
-|style       | `object` |            | Override the inline-styles of the root element.
-|value       | `any` |            | The value of the text field.
-|disabled    | `boolean`| false   | Disables underlying autocomplete.
+|Name|Type|Default|Description|
+|---|---|---|---|
+|className|`string`|`''`|Custom top-level class|
+|classes*|`object`||Override or extend the styles applied to the component.|
+|closeIcon|`node`|`<ClearIcon style={{ color: grey[500] }} />`|Override the close icon.|
+|disabled|`bool`|`false`|Disables text field.|
+|placeholder|`string`|`'Search'`|Sets placeholder text for the embedded text field.|
+|onChange|`func`||Fired when the text value changes.|
+|onRequestSearch*|`func`||Fired when the search icon is clicked.|
+|searchIcon|`node`|`<SearchIcon style={{ color: grey[500] }} />`|Override the search icon.|
+|style|`object`|`null`|Override the inline-styles of the root element.|
+|value|`string`|`''`|The value of the text field.|
+|cancelOnEscape|`bool`||Whether to clear search on escape|
 
 \* required property
 
