@@ -95,7 +95,7 @@ class SearchBar extends Component {
   }
 
   handleKeyUp = (e) => {
-    if (e.charCode === 13 || e.key === 'Enter') {
+    if (this.props.onRequestSearch && (e.charCode === 13 || e.key === 'Enter')) {
       this.props.onRequestSearch(this.state.value)
     } else if (this.props.cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
       this.handleCancel()
@@ -193,7 +193,7 @@ SearchBar.propTypes = {
   /** Fired when the text value changes. */
   onChange: PropTypes.func,
   /** Fired when the search icon is clicked. */
-  onRequestSearch: PropTypes.func.isRequired,
+  onRequestSearch: PropTypes.func,
   /** Override the search icon. */
   searchIcon: PropTypes.node,
   /** Override the inline-styles of the root element. */

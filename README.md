@@ -38,7 +38,7 @@ return (
 |disabled|`bool`|`false`|Disables text field.|
 |placeholder|`string`|`'Search'`|Sets placeholder text for the embedded text field.|
 |onChange|`func`||Fired when the text value changes.|
-|onRequestSearch*|`func`||Fired when the search icon is clicked.|
+|onRequestSearch|`func`||Fired when the search icon is clicked.|
 |searchIcon|`node`|`<SearchIcon style={{ color: grey[500] }} />`|Override the search icon.|
 |style|`object`|`null`|Override the inline-styles of the root element.|
 |value|`string`|`''`|The value of the text field.|
