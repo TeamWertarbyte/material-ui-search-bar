@@ -112,7 +112,7 @@ class SearchBar extends Component {
       classes,
       closeIcon,
       disabled,
-      onRequestSearch, // eslint-disable-line
+      onRequestSearch,
       searchIcon,
       style,
       ...inputProps
@@ -138,6 +138,7 @@ class SearchBar extends Component {
           />
         </div>
         <IconButton
+          onClick={onRequestSearch}
           classes={{
             root: classNames(classes.iconButton, classes.searchIconButton, {
               [classes.iconButtonHidden]: value !== ''
