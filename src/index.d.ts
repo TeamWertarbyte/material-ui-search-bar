@@ -14,7 +14,16 @@ declare module 'material-ui-search-bar' {
       /**
        * Override or extend the styles applied to the component.
        */
-      classes?: any;
+      classes?: {
+        root?: string,
+        iconButton?: string,
+        iconButtonHidden?: string,
+        iconButtonDisabled?: string,
+        searchIconButton?: string,
+        icon?: string,
+        input?: string,
+        searchContainer?: string
+      };
       /**
        * Custom top-level class.
        */
@@ -22,19 +31,15 @@ declare module 'material-ui-search-bar' {
       /**
        * Override the close icon.
        */
-      closeIcon?: any;
+      closeIcon?: JSX.Element;
       /**
        * Disables text field.
        */
-      disabled?: any;
+      disabled?: boolean;
       /**
        * Fired when the search is cancelled.
        */
       onCancelSearch?(): void;
-      /**
-       * Sets placeholder for the embedded text field.
-       */
-      placeholder?: any;
       /**
        * Fired when the text value changes.
        */
@@ -44,13 +49,17 @@ declare module 'material-ui-search-bar' {
        */
       onRequestSearch?(): void;
       /**
+       * Sets placeholder for the embedded text field.
+       */
+      placeholder?: string;
+      /**
        * Override the search icon.
        */
-      searchIcon?: any;
+      searchIcon?: JSX.Element
       /**
        * Override the inline-styles of the root element.
        */
-      style?: any;
+      style?: object;
       /**
        * The value of the text field.
        */
