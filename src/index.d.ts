@@ -32,6 +32,10 @@ declare module 'material-ui-search-bar' {
        */
       searchIcon?: any;
       /**
+       * The element class.
+       */
+      className?: string
+      /**
        * Override the inline-styles of the root element.
        */
       style?: any;
