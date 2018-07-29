@@ -1,6 +1,6 @@
 // Type definitions for Material Search Bar
 // Project: https://github.com/TeamWertarbyte/material-ui-search-bar
-// Definitions by: [Tyler Kellogg] <recurrence@gmail.com>
+// Original definitions by: [Tyler Kellogg] <recurrence@gmail.com>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 /// <reference types="react" />
@@ -27,7 +27,7 @@ declare module 'material-ui-search-bar' {
       /**
        * Custom top-level class.
        */
-      className?: string
+      className?: string;
       /**
        * Override the close icon.
        */
@@ -55,7 +55,7 @@ declare module 'material-ui-search-bar' {
       /**
        * Override the search icon.
        */
-      searchIcon?: JSX.Element
+      searchIcon?: JSX.Element;
       /**
        * Override the inline-styles of the root element.
        */
