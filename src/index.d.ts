@@ -8,6 +8,18 @@
 declare module 'material-ui-search-bar' {
   export interface SearchBarProps {
       /**
+       * Whether to clear search on escape.
+       */
+      cancelOnEscape?: boolean;
+      /**
+       * Override or extend the styles applied to the component.
+       */
+      classes?: any;
+      /**
+       * Custom top-level class.
+       */
+      className?: string
+      /**
        * Override the close icon.
        */
       closeIcon?: any;
@@ -15,6 +27,10 @@ declare module 'material-ui-search-bar' {
        * Disables text field.
        */
       disabled?: any;
+      /**
+       * Fired when the search is cancelled.
+       */
+      onCancelSearch?(): void;
       /**
        * Sets placeholder for the embedded text field.
        */
@@ -31,10 +47,6 @@ declare module 'material-ui-search-bar' {
        * Override the search icon.
        */
       searchIcon?: any;
-      /**
-       * The element class.
-       */
-      className?: string
       /**
        * Override the inline-styles of the root element.
        */
