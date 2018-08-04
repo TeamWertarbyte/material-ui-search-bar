@@ -114,6 +114,7 @@ class SearchBar extends Component {
       classes,
       closeIcon,
       disabled,
+      onCancelSearch,
       onRequestSearch,
       searchIcon,
       style,
