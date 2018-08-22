@@ -110,6 +110,7 @@ class SearchBar extends Component {
   render () {
     const { value } = this.state
     const {
+      cancelOnEscape,
       className,
       classes,
       closeIcon,
