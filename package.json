@@ -32,8 +32,8 @@
   },
   "homepage": "https://github.com/TeamWertarbyte/material-ui-search-bar#readme",
   "devDependencies": {
-    "@material-ui/core": "^1.0.0",
-    "@material-ui/icons": "^1.0.0",
+    "@material-ui/core": "^3.0.2",
+    "@material-ui/icons": "^3.0.1",
     "@webpack-blocks/babel6": "^0.4.1",
     "@webpack-blocks/postcss": "^0.4.3",
     "@webpack-blocks/webpack2": "^0.4.0",
@@ -50,8 +50,8 @@
     "standard": "^10.0.2"
   },
   "peerDependencies": {
-    "@material-ui/core": "^1.0.0",
-    "@material-ui/icons": "^1.0.0",
+    "@material-ui/core": "^1.0.0 || ^3.0.0",
+    "@material-ui/icons": "^1.0.0 || ^3.0.0",
     "react": "^16.3.0"
   },
   "dependencies": {
