@@ -41,7 +41,7 @@ const styles = {
   },
   searchContainer: {
     margin: 'auto 16px',
-    width: '100%'
+    width: 'calc(100% - 48px - 32px)' // 48px button + 32px margin
   }
 }
 
