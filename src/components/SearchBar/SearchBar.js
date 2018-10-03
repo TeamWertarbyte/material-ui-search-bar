@@ -43,7 +43,7 @@ const styles = {
   },
   searchContainer: {
     margin: 'auto 16px',
-    width: 'calc(100% - 48px - 32px)' // 48px button + 32px margin
+    flex: 'auto'
   }
 }
 
