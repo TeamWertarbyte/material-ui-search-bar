@@ -97,13 +97,19 @@ class SearchBar extends Component {
   }
 
   handleKeyUp = (e) => {
-    if (this.props.onRequestSearch && (e.charCode === 13 || e.key === 'Enter')) {
-      this.props.onRequestSearch(this.state.value)
+    if (e.charCode === 13 || e.key === 'Enter') {
+      this.handleRequestSearch()
     } else if (this.props.cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
       this.handleCancel()
     }
     if (this.props.onKeyUp) {
       this.props.onKeyUp(e)
+    }
+  }
+
+  handleRequestSearch = () => {
+    if (this.props.onRequestSearch) {
+      this.props.onRequestSearch(this.state.value)
     }
   }
 
@@ -142,7 +148,7 @@ class SearchBar extends Component {
           />
         </div>
         <IconButton
-          onClick={onRequestSearch}
+          onClick={this.handleRequestSearch}
           classes={{
             root: classNames(classes.iconButton, classes.searchIconButton, {
               [classes.iconButtonHidden]: value !== ''
