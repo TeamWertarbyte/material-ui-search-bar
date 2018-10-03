@@ -199,6 +199,12 @@ SearchBar.propTypes = {
   onCancelSearch: PropTypes.func,
   /** Fired when the text value changes. */
   onChange: PropTypes.func,
+  /** The text field onKeyUp event handler. */
+  onKeyUp: PropTypes.func,
+  /** Fired then the text field loses focus. */
+  onBlur: PropTypes.func,
+  /** Fired then the text field receives focus. */
+  onFocus: PropTypes.func,
   /** Fired when the search icon is clicked. */
   onRequestSearch: PropTypes.func,
   /** Sets placeholder text for the embedded text field. */
