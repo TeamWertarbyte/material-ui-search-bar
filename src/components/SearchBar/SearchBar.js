@@ -9,6 +9,8 @@ import { grey } from '@material-ui/core/colors'
 import withStyles from '@material-ui/core/styles/withStyles'
 import classNames from 'classnames'
 
+const noop = () => {}
+
 const styles = {
   root: {
     height: 48,
@@ -67,9 +69,7 @@ class SearchBar extends Component {
 
   handleFocus = (e) => {
     this.setState({focus: true})
-    if (this.props.onFocus) {
-      this.props.onFocus(e)
-    }
+    this.props.onFocus(e)
   }
 
   handleBlur = (e) => {
@@ -77,23 +77,18 @@ class SearchBar extends Component {
     if (this.state.value.trim().length === 0) {
       this.setState({value: ''})
     }
-    if (this.props.onBlur) {
-      this.props.onBlur(e)
-    }
+
+    this.props.onBlur(e)
   }
 
   handleInput = (e) => {
     this.setState({value: e.target.value})
-    if (this.props.onChange) {
-      this.props.onChange(e.target.value)
-    }
+    this.props.onChange(e.target.value)
   }
 
   handleCancel = () => {
     this.setState({active: false, value: ''})
-    if (this.props.onCancelSearch) {
-      this.props.onCancelSearch()
-    }
+    this.props.onCancelSearch()
   }
 
   handleKeyUp = (e) => {
@@ -102,9 +97,8 @@ class SearchBar extends Component {
     } else if (this.props.cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
       this.handleCancel()
     }
-    if (this.props.onKeyUp) {
-      this.props.onKeyUp(e)
-    }
+
+    this.props.onKeyUp(e)
   }
 
   render () {
@@ -181,7 +175,12 @@ SearchBar.defaultProps = {
   placeholder: 'Search',
   searchIcon: <SearchIcon style={{ color: grey[500] }} />,
   style: null,
-  value: ''
+  value: '',
+  onBlur: noop,
+  onFocus: noop,
+  onKeyUp: noop,
+  onChange: noop,
+  onCancelSearch: noop
 }
 
 SearchBar.propTypes = {
