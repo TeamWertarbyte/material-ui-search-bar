@@ -9,7 +9,7 @@ import { grey } from '@material-ui/core/colors'
 import withStyles from '@material-ui/core/styles/withStyles'
 import classNames from 'classnames'
 
-const noop = () => {};
+const noop = () => {}
 
 const styles = {
   root: {
@@ -96,7 +96,7 @@ class SearchBar extends Component {
 
   handleKeyUp = (e) => {
     if (e.charCode === 13 || e.key === 'Enter') {
-      this.handleRequestSearch();
+      this.handleRequestSearch()
     } else if (this.props.cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
       this.handleCancel()
     }
@@ -106,7 +106,7 @@ class SearchBar extends Component {
   }
 
   handleRequestSearch = () => {
-    this.props.onRequestSearch(this.state.value);
+    this.props.onRequestSearch(this.state.value)
   }
 
   render () {
@@ -186,7 +186,7 @@ SearchBar.defaultProps = {
   value: '',
   onChange: noop,
   onCancelSearch: noop,
-  onRequestSearch: noop,
+  onRequestSearch: noop
 }
 
 SearchBar.propTypes = {
