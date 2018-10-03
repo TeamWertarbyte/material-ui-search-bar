@@ -9,8 +9,6 @@ import { grey } from '@material-ui/core/colors'
 import withStyles from '@material-ui/core/styles/withStyles'
 import classNames from 'classnames'
 
-const noop = () => {}
-
 const styles = {
   root: {
     height: 48,
@@ -43,7 +41,7 @@ const styles = {
   },
   searchContainer: {
     margin: 'auto 16px',
-    flex: 'auto'
+    flex: 'calc(100% - 48px - 32px)' // 48px button + 32px margin
   }
 }
 
@@ -86,12 +84,16 @@ class SearchBar extends Component {
 
   handleInput = (e) => {
     this.setState({value: e.target.value})
-    this.props.onChange(e.target.value)
+    if (this.props.onChange) {
+      this.props.onChange(e.target.value)
+    }
   }
 
   handleCancel = () => {
     this.setState({active: false, value: ''})
-    this.props.onCancelSearch()
+    if (this.props.onCancelSearch) {
+      this.props.onCancelSearch()
+    }
   }
 
   handleKeyUp = (e) => {
@@ -106,7 +108,9 @@ class SearchBar extends Component {
   }
 
   handleRequestSearch = () => {
-    this.props.onRequestSearch(this.state.value)
+    if (this.props.onRequestSearch) {
+      this.props.onRequestSearch(this.state.value)
+    }
   }
 
   render () {
@@ -183,10 +187,7 @@ SearchBar.defaultProps = {
   placeholder: 'Search',
   searchIcon: <SearchIcon style={{ color: grey[500] }} />,
   style: null,
-  value: '',
-  onChange: noop,
-  onCancelSearch: noop,
-  onRequestSearch: noop
+  value: ''
 }
 
 SearchBar.propTypes = {
