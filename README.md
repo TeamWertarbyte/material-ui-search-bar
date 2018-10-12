@@ -47,6 +47,8 @@ return (
 
 \* required property
 
+Any other properties supplied will be spread to the underlying [`Input`](https://material-ui.com/api/input/#input) component.
+
 ## License
 
 The files included in this repository are licensed under the MIT license.
