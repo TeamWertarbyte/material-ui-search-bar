@@ -9,8 +9,6 @@ import { grey } from '@material-ui/core/colors'
 import withStyles from '@material-ui/core/styles/withStyles'
 import classNames from 'classnames'
 
-const noop = () => {}
-
 const styles = {
   root: {
     height: 48,
@@ -69,7 +67,9 @@ class SearchBar extends Component {
 
   handleFocus = (e) => {
     this.setState({focus: true})
-    this.props.onFocus(e)
+    if (this.props.onFocus) {
+      this.props.onFocus(e)
+    }
   }
 
   handleBlur = (e) => {
@@ -77,18 +77,23 @@ class SearchBar extends Component {
     if (this.state.value.trim().length === 0) {
       this.setState({value: ''})
     }
-
-    this.props.onBlur(e)
+    if (this.props.onBlur) {
+      this.props.onBlur(e)
+    }
   }
 
   handleInput = (e) => {
     this.setState({value: e.target.value})
-    this.props.onChange(e.target.value)
+    if (this.props.onChange) {
+      this.props.onChange(e.target.value)
+    }
   }
 
   handleCancel = () => {
     this.setState({active: false, value: ''})
-    this.props.onCancelSearch()
+    if (this.props.onCancelSearch) {
+      this.props.onCancelSearch()
+    }
   }
 
   handleKeyUp = (e) => {
@@ -97,8 +102,9 @@ class SearchBar extends Component {
     } else if (this.props.cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
       this.handleCancel()
     }
-
-    this.props.onKeyUp(e)
+    if (this.props.onKeyUp) {
+      this.props.onKeyUp(e)
+    }
   }
 
   render () {
@@ -175,12 +181,7 @@ SearchBar.defaultProps = {
   placeholder: 'Search',
   searchIcon: <SearchIcon style={{ color: grey[500] }} />,
   style: null,
-  value: '',
-  onBlur: noop,
-  onFocus: noop,
-  onKeyUp: noop,
-  onChange: noop,
-  onCancelSearch: noop
+  value: ''
 }
 
 SearchBar.propTypes = {
@@ -198,12 +199,6 @@ SearchBar.propTypes = {
   onCancelSearch: PropTypes.func,
   /** Fired when the text value changes. */
   onChange: PropTypes.func,
-  /** The text field onKeyUp event handler. */
-  onKeyUp: PropTypes.func,
-  /** Fired then the text field loses focus. */
-  onBlur: PropTypes.func,
-  /** Fired then the text field receives focus. */
-  onFocus: PropTypes.func,
   /** Fired when the search icon is clicked. */
   onRequestSearch: PropTypes.func,
   /** Sets placeholder text for the embedded text field. */
