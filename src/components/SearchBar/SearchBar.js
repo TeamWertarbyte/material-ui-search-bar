@@ -61,7 +61,7 @@ class SearchBar extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     if (this.props.value !== nextProps.value) {
       this.setState({...this.state, value: nextProps.value})
     }
