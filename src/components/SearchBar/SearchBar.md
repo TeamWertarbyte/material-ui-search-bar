@@ -22,3 +22,21 @@ SearchBar Disabled example:
        disabled
      />
 ```
+
+Blur on search:
+```
+    let ref = React.createRef();
+
+    <SearchBar
+      innerRef={ref}
+      onChange={() => console.log('onChange')}
+      onRequestSearch={() => {
+        ref.current.blur()
+        console.log('onRequestSearch')
+      }}
+      style={{
+        margin: '0 auto',
+        maxWidth: 800
+      }}
+    />
+```

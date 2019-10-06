@@ -50,6 +50,8 @@ const styles = {
  * @see [Search patterns](https://material.io/guidelines/patterns/search.html)
  */
 class SearchBar extends Component {
+  inputRef = React.createRef()
+
   constructor (props) {
     super(props)
     this.state = {
@@ -113,6 +115,22 @@ class SearchBar extends Component {
     }
   }
 
+  /**
+   * @public
+   * Focus the input component.
+   */
+  focus = () => {
+    this.inputRef.current.focus()
+  }
+
+  /**
+   * @public
+   * Blur the input component.
+   */
+  blur = () => {
+    this.inputRef.current.blur()
+  }
+
   render () {
     const { value } = this.state
     const {
@@ -136,6 +154,7 @@ class SearchBar extends Component {
         <div className={classes.searchContainer}>
           <Input
             {...inputProps}
+            inputRef={this.inputRef}
             onBlur={this.handleBlur}
             value={value}
             onChange={this.handleInput}
