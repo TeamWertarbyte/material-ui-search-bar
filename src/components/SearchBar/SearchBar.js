@@ -61,10 +61,11 @@ class SearchBar extends Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (this.props.value !== nextProps.value) {
-      this.setState({...this.state, value: nextProps.value})
+  static getDerivedStateFromProps (props, state) {
+    if (props.value !== state.value) {
+      return { value: props.value }
     }
+    return null
   }
 
   handleFocus = (e) => {
