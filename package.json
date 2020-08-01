@@ -1,6 +1,6 @@
 {
   "name": "material-ui-search-bar",
-  "version": "1.0.0",
+  "version": "2.0.0-alpha.1",
   "description": "Material style search bar",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
