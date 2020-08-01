@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import IconButton from "@material-ui/core/IconButton";
 import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
 import ClearIcon from "@material-ui/icons/Clear";
 import SearchIcon from "@material-ui/icons/Search";
-import { grey } from "@material-ui/core/colors";
 import withStyles from "@material-ui/core/styles/withStyles";
 import classNames from "classnames";
 
@@ -16,9 +15,9 @@ const styles = (theme) => ({
     justifyContent: "space-between",
   },
   iconButton: {
-    opacity: 0.54, // TODO
+    color: theme.palette.action.active,
     transform: "scale(1, 1)",
-    transition: theme.transitions.create(["transform"], {
+    transition: theme.transitions.create(["transform", "color"], {
       duration: theme.transitions.duration.shorter,
       easing: theme.transitions.easing.easeInOut,
     }),
@@ -29,15 +28,14 @@ const styles = (theme) => ({
       opacity: 0,
     },
   },
-  iconButtonDisabled: {
-    opacity: 0.38, // TODO
-  },
   searchIconButton: {
     marginRight: theme.spacing(-6),
   },
   icon: {
-    opacity: 0.54, // TODO
-    transition: "opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)", // TODO
+    transition: theme.transitions.create(["opacity"], {
+      duration: theme.transitions.duration.shorter,
+      easing: theme.transitions.easing.easeInOut,
+    }),
   },
   input: {
     width: "100%",
@@ -162,12 +160,9 @@ const SearchBar = React.forwardRef(
         </div>
         <IconButton
           onClick={handleRequestSearch}
-          classes={{
-            root: classNames(classes.iconButton, classes.searchIconButton, {
-              [classes.iconButtonHidden]: value !== "",
-            }),
-            disabled: classes.iconButtonDisabled,
-          }}
+          className={classNames(classes.iconButton, classes.searchIconButton, {
+            [classes.iconButtonHidden]: value !== "",
+          })}
           disabled={disabled}
         >
           {React.cloneElement(searchIcon, {
@@ -176,12 +171,9 @@ const SearchBar = React.forwardRef(
         </IconButton>
         <IconButton
           onClick={handleCancel}
-          classes={{
-            root: classNames(classes.iconButton, {
-              [classes.iconButtonHidden]: value === "",
-            }),
-            disabled: classes.iconButtonDisabled,
-          }}
+          className={classNames(classes.iconButton, {
+            [classes.iconButtonHidden]: value === "",
+          })}
           disabled={disabled}
         >
           {React.cloneElement(closeIcon, {
@@ -195,10 +187,10 @@ const SearchBar = React.forwardRef(
 
 SearchBar.defaultProps = {
   className: "",
-  closeIcon: <ClearIcon style={{ color: grey[500] }} />,
+  closeIcon: <ClearIcon />,
   disabled: false,
   placeholder: "Search",
-  searchIcon: <SearchIcon style={{ color: grey[500] }} />,
+  searchIcon: <SearchIcon />,
   style: null,
   value: "",
 };
