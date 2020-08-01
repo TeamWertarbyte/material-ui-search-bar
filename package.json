@@ -5,13 +5,13 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "test": "standard",
     "build": "babel src -d lib --copy-files",
     "prepare": "babel src -d lib --copy-files",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
     "publish-docs": "npm run styleguide:build && npm run gh-pages",
-    "gh-pages": "./node_modules/.bin/gh-pages -d styleguide"
+    "gh-pages": "./node_modules/.bin/gh-pages -d styleguide",
+    "prettier": "prettier --write \"**/*.{json,md,js}\""
   },
   "repository": {
     "type": "git",
@@ -39,12 +39,11 @@
     "@babel/preset-react": "^7.10.4",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "babel-eslint": "^7.2.3",
     "gh-pages": "^1.2.0",
+    "prettier": "^2.0.5",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-styleguidist": "^11.0.8",
-    "standard": "^10.0.2",
     "webpack": "^4.44.1",
     "webpack-blocks": "^2.1.0"
   },

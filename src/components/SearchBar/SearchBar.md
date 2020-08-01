@@ -1,4 +1,5 @@
 SearchBar example:
+
 ```
     <SearchBar
       onChange={() => console.log('onChange')}
@@ -12,6 +13,7 @@ SearchBar example:
 ```
 
 SearchBar Disabled example:
+
 ```
     <SearchBar
        onChange={() => console.log('onChange')}
@@ -25,6 +27,7 @@ SearchBar Disabled example:
 ```
 
 Blur on search:
+
 ```
     let ref = React.createRef();
 

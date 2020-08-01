@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class Wrapper extends Component {
-  render () {
+  render() {
     return (
-      <div style={{fontFamily: 'Roboto, sans-serif'}}>
+      <div style={{ fontFamily: "Roboto, sans-serif" }}>
         {this.props.children}
       </div>
-    )
+    );
   }
 }
