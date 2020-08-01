@@ -1,140 +1,60 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import IconButton from '@material-ui/core/IconButton'
-import Input from '@material-ui/core/Input'
-import Paper from '@material-ui/core/Paper'
-import ClearIcon from '@material-ui/icons/Clear'
-import SearchIcon from '@material-ui/icons/Search'
-import { grey } from '@material-ui/core/colors'
-import withStyles from '@material-ui/core/styles/withStyles'
-import classNames from 'classnames'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import IconButton from "@material-ui/core/IconButton";
+import Input from "@material-ui/core/Input";
+import Paper from "@material-ui/core/Paper";
+import ClearIcon from "@material-ui/icons/Clear";
+import SearchIcon from "@material-ui/icons/Search";
+import { grey } from "@material-ui/core/colors";
+import withStyles from "@material-ui/core/styles/withStyles";
+import classNames from "classnames";
 
-const styles = {
+const styles = (theme) => ({
   root: {
-    height: 48,
-    display: 'flex',
-    justifyContent: 'space-between'
+    height: theme.spacing(6),
+    display: "flex",
+    justifyContent: "space-between",
   },
   iconButton: {
-    opacity: 0.54,
-    transform: 'scale(1, 1)',
-    transition: 'transform 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
+    opacity: 0.54, // TODO
+    transform: "scale(1, 1)",
+    transition: theme.transitions.create(["transform"], {
+      duration: theme.transitions.duration.shorter,
+      easing: theme.transitions.easing.easeInOut,
+    }),
   },
   iconButtonHidden: {
-    transform: 'scale(0, 0)',
-    '& > $icon': {
-      opacity: 0
-    }
+    transform: "scale(0, 0)",
+    "& > $icon": {
+      opacity: 0,
+    },
   },
   iconButtonDisabled: {
-    opacity: 0.38
+    opacity: 0.38, // TODO
   },
   searchIconButton: {
-    marginRight: -48
+    marginRight: theme.spacing(-6),
   },
   icon: {
-    opacity: 0.54,
-    transition: 'opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)'
+    opacity: 0.54, // TODO
+    transition: "opacity 200ms cubic-bezier(0.4, 0.0, 0.2, 1)", // TODO
   },
   input: {
-    width: '100%'
+    width: "100%",
   },
   searchContainer: {
-    margin: 'auto 16px',
-    width: 'calc(100% - 48px - 32px)' // 48px button + 32px margin
-  }
-}
+    margin: "auto 16px",
+    width: `calc(100% - ${theme.spacing(6 + 4)}px)`, // 6 button + 4 margin
+  },
+});
 
 /**
  * Material design search bar
- * @see [Search patterns](https://material.io/guidelines/patterns/search.html)
+ * @see [Search patterns](https://material.io/archive/guidelines/patterns/search.html)
  */
-class SearchBar extends Component {
-  inputRef = React.createRef()
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      focus: false,
-      value: this.props.value,
-      active: false
-    }
-  }
-
-  static getDerivedStateFromProps (props, state) {
-    if (props.value !== state.value) {
-      return { value: props.value }
-    }
-    return null
-  }
-
-  handleFocus = (e) => {
-    this.setState({focus: true})
-    if (this.props.onFocus) {
-      this.props.onFocus(e)
-    }
-  }
-
-  handleBlur = (e) => {
-    this.setState({focus: false})
-    if (this.state.value.trim().length === 0) {
-      this.setState({value: ''})
-    }
-    if (this.props.onBlur) {
-      this.props.onBlur(e)
-    }
-  }
-
-  handleInput = (e) => {
-    this.setState({value: e.target.value})
-    if (this.props.onChange) {
-      this.props.onChange(e.target.value)
-    }
-  }
-
-  handleCancel = () => {
-    this.setState({active: false, value: ''})
-    if (this.props.onCancelSearch) {
-      this.props.onCancelSearch()
-    }
-  }
-
-  handleKeyUp = (e) => {
-    if (e.charCode === 13 || e.key === 'Enter') {
-      this.handleRequestSearch()
-    } else if (this.props.cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
-      this.handleCancel()
-    }
-    if (this.props.onKeyUp) {
-      this.props.onKeyUp(e)
-    }
-  }
-
-  handleRequestSearch = () => {
-    if (this.props.onRequestSearch) {
-      this.props.onRequestSearch(this.state.value)
-    }
-  }
-
-  /**
-   * @public
-   * Focus the input component.
-   */
-  focus = () => {
-    this.inputRef.current.focus()
-  }
-
-  /**
-   * @public
-   * Blur the input component.
-   */
-  blur = () => {
-    this.inputRef.current.blur()
-  }
-
-  render () {
-    const { value } = this.state
-    const {
+const SearchBar = React.forwardRef(
+  (
+    {
       cancelOnEscape,
       className,
       classes,
@@ -145,22 +65,95 @@ class SearchBar extends Component {
       searchIcon,
       style,
       ...inputProps
-    } = this.props
+    },
+    ref
+  ) => {
+    const inputRef = React.useRef();
+    const [value, setValue] = React.useState(inputProps.value);
+
+    React.useEffect(() => {
+      setValue(inputProps.value);
+    }, [inputProps.value]);
+
+    const handleFocus = React.useCallback(
+      (e) => {
+        if (inputProps.onFocus) {
+          inputProps.onFocus(e);
+        }
+      },
+      [inputProps.onFocus]
+    );
+
+    const handleBlur = React.useCallback(
+      (e) => {
+        setValue((v) => v.trim());
+        if (inputProps.onBlur) {
+          inputProps.onBlur(e);
+        }
+      },
+      [inputProps.onBlur]
+    );
+
+    const handleInput = React.useCallback(
+      (e) => {
+        setValue(e.target.value);
+        if (inputProps.onChange) {
+          inputProps.onChange(e.target.value);
+        }
+      },
+      [inputProps.onChange]
+    );
+
+    const handleCancel = React.useCallback(() => {
+      setValue("");
+      if (onCancelSearch) {
+        onCancelSearch();
+      }
+    }, [onCancelSearch]);
+
+    const handleRequestSearch = React.useCallback(() => {
+      if (onRequestSearch) {
+        onRequestSearch(value);
+      }
+    }, [onRequestSearch, value]);
+
+    const handleKeyUp = React.useCallback(
+      (e) => {
+        if (e.charCode === 13 || e.key === "Enter") {
+          handleRequestSearch();
+        } else if (
+          cancelOnEscape &&
+          (e.charCode === 27 || e.key === "Escape")
+        ) {
+          handleCancel();
+        }
+        if (inputProps.onKeyUp) {
+          inputProps.onKeyUp(e);
+        }
+      },
+      [handleRequestSearch, cancelOnEscape, handleCancel, inputProps.onKeyUp]
+    );
+
+    React.useImperativeHandle(ref, () => ({
+      focus: () => {
+        inputRef.current.focus();
+      },
+      blur: () => {
+        inputRef.current.blur();
+      },
+    }));
 
     return (
-      <Paper
-        className={classNames(classes.root, className)}
-        style={style}
-      >
+      <Paper className={classNames(classes.root, className)} style={style}>
         <div className={classes.searchContainer}>
           <Input
             {...inputProps}
-            inputRef={this.inputRef}
-            onBlur={this.handleBlur}
+            inputRef={inputRef}
+            onBlur={handleBlur}
             value={value}
-            onChange={this.handleInput}
-            onKeyUp={this.handleKeyUp}
-            onFocus={this.handleFocus}
+            onChange={handleInput}
+            onKeyUp={handleKeyUp}
+            onFocus={handleFocus}
             fullWidth
             className={classes.input}
             disableUnderline
@@ -168,47 +161,47 @@ class SearchBar extends Component {
           />
         </div>
         <IconButton
-          onClick={this.handleRequestSearch}
+          onClick={handleRequestSearch}
           classes={{
             root: classNames(classes.iconButton, classes.searchIconButton, {
-              [classes.iconButtonHidden]: value !== ''
+              [classes.iconButtonHidden]: value !== "",
             }),
-            disabled: classes.iconButtonDisabled
+            disabled: classes.iconButtonDisabled,
           }}
           disabled={disabled}
         >
           {React.cloneElement(searchIcon, {
-            classes: { root: classes.icon }
+            classes: { root: classes.icon },
           })}
         </IconButton>
         <IconButton
-          onClick={this.handleCancel}
+          onClick={handleCancel}
           classes={{
             root: classNames(classes.iconButton, {
-              [classes.iconButtonHidden]: value === ''
+              [classes.iconButtonHidden]: value === "",
             }),
-            disabled: classes.iconButtonDisabled
+            disabled: classes.iconButtonDisabled,
           }}
           disabled={disabled}
         >
           {React.cloneElement(closeIcon, {
-            classes: { root: classes.icon }
+            classes: { root: classes.icon },
           })}
         </IconButton>
       </Paper>
-    )
+    );
   }
-}
+);
 
 SearchBar.defaultProps = {
-  className: '',
+  className: "",
   closeIcon: <ClearIcon style={{ color: grey[500] }} />,
   disabled: false,
-  placeholder: 'Search',
+  placeholder: "Search",
   searchIcon: <SearchIcon style={{ color: grey[500] }} />,
   style: null,
-  value: ''
-}
+  value: "",
+};
 
 SearchBar.propTypes = {
   /** Whether to clear search on escape */
@@ -234,7 +227,7 @@ SearchBar.propTypes = {
   /** Override the inline-styles of the root element. */
   style: PropTypes.object,
   /** The value of the text field. */
-  value: PropTypes.string
-}
+  value: PropTypes.string,
+};
 
-export default withStyles(styles)(SearchBar)
+export default withStyles(styles)(SearchBar);

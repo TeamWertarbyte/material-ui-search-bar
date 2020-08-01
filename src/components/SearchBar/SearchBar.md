@@ -23,7 +23,7 @@ SearchBar Disabled example:
      />
 ```
 
-Blur on search:
+Blur on search and cancel when pressing escape:
 ```
     let ref = React.createRef();
 
@@ -38,5 +38,6 @@ Blur on search:
         margin: '0 auto',
         maxWidth: 800
       }}
+      cancelOnEscape
     />
 ```
