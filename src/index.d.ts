@@ -64,6 +64,10 @@ declare module 'material-ui-search-bar' {
        * The value of the text field.
        */
       value?: string;
+      /**
+        * Whether to focus SearchBar on render.
+        */
+      autoFocus?: boolean;
   }
 
   const SearchBar: React.ComponentType<SearchBarProps>;
