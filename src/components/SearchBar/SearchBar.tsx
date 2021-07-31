@@ -1,64 +1,66 @@
-import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import Input from '@material-ui/core/Input';
-import Paper from '@material-ui/core/Paper';
-import ClearIcon from '@material-ui/icons/Clear';
-import SearchIcon from '@material-ui/icons/Search';
-import withStyles from '@material-ui/core/styles/withStyles';
-import classNames from 'classnames';
-import { ReactElement } from 'react';
+import React, { ReactElement } from "react";
+import IconButton from "@material-ui/core/IconButton";
+import Input from "@material-ui/core/Input";
+import Paper from "@material-ui/core/Paper";
+import ClearIcon from "@material-ui/icons/Clear";
+import SearchIcon from "@material-ui/icons/Search";
+import withStyles from "@material-ui/core/styles/withStyles";
+import classNames from "classnames";
+import { Theme } from "@material-ui/core/styles";
 
-const styles = (theme) => ({
-  root: {
-    height: theme.spacing(6),
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  iconButton: {
-    color: theme.palette.action.active,
-    transform: 'scale(1, 1)',
-    transition: theme.transitions.create(['transform', 'color'], {
-      duration: theme.transitions.duration.shorter,
-      easing: theme.transitions.easing.easeInOut,
-    }),
-  },
-  iconButtonHidden: {
-    transform: 'scale(0, 0)',
-    '& > $icon': {
-      opacity: 0,
+const styles = (theme: Theme) => {
+  return {
+    root: {
+      height: theme.spacing(6),
+      display: "flex",
+      justifyContent: "space-between",
     },
-  },
-  searchIconButton: {
-    marginRight: theme.spacing(-6),
-  },
-  icon: {
-    transition: theme.transitions.create(['opacity'], {
-      duration: theme.transitions.duration.shorter,
-      easing: theme.transitions.easing.easeInOut,
-    }),
-  },
-  input: {
-    width: '100%',
-  },
-  searchContainer: {
-    margin: 'auto 16px',
-    width: `calc(100% - ${theme.spacing(6 + 4)}px)`, // 6 button + 4 margin
-  },
-});
+    iconButton: {
+      color: theme.palette.action.active,
+      transform: "scale(1, 1)",
+      transition: theme.transitions.create(["transform", "color"], {
+        duration: theme.transitions.duration.shorter,
+        easing: theme.transitions.easing.easeInOut,
+      }),
+    },
+    iconButtonHidden: {
+      transform: "scale(0, 0)",
+      "& > $icon": {
+        opacity: 0,
+      },
+    },
+    searchIconButton: {
+      marginRight: theme.spacing(-6),
+    },
+    icon: {
+      transition: theme.transitions.create(["opacity"], {
+        duration: theme.transitions.duration.shorter,
+        easing: theme.transitions.easing.easeInOut,
+      }),
+    },
+    input: {
+      width: "100%",
+    },
+    searchContainer: {
+      margin: "auto 16px",
+      width: `calc(100% - ${theme.spacing(6 + 4)}px)`, // 6 button + 4 margin
+    },
+  };
+};
 
 interface ISearchBarProps {
   /** Whether to clear search on escape */
   cancelOnEscape?: boolean;
   /** Override or extend the styles applied to the component. */
   classes?: {
-    root?: string,
-    iconButton?: string,
-    iconButtonHidden?: string,
-    iconButtonDisabled?: string,
-    searchIconButton?: string,
-    icon?: string,
-    input?: string,
-    searchContainer?: string
+    root?: string;
+    iconButton?: string;
+    iconButtonHidden?: string;
+    iconButtonDisabled?: string;
+    searchIconButton?: string;
+    icon?: string;
+    input?: string;
+    searchContainer?: string;
   };
   /** Custom top-level class */
   className?: string;
@@ -93,15 +95,15 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
   (
     {
       cancelOnEscape,
-      className = '',
-      classes = {},
+      className = "",
+      classes,
       closeIcon = <ClearIcon />,
       disabled = false,
       onCancelSearch,
       onRequestSearch,
       searchIcon = <SearchIcon />,
       style,
-      placeholder = 'Search',
+      placeholder = "Search",
       onBlur,
       onFocus,
       onKeyUp,
@@ -111,12 +113,12 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
     ref
   ) => {
     const inputRef: React.MutableRefObject<{
-      current: HTMLInputElement;
+      current: HTMLInputElement | null;
     }> = React.useRef({ current: null });
-    const [value, setValue] = React.useState(inputProps.value ?? '');
+    const [value, setValue] = React.useState(inputProps.value ?? "");
 
     React.useEffect(() => {
-      setValue(inputProps.value);
+      setValue(inputProps.value ?? "");
     }, [inputProps.value]);
 
     const handleFocus = React.useCallback(
@@ -149,7 +151,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
     );
 
     const handleCancel = React.useCallback(() => {
-      setValue('');
+      setValue("");
       if (onCancelSearch) {
         onCancelSearch();
       }
@@ -163,9 +165,12 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
 
     const handleKeyUp = React.useCallback(
       (e) => {
-        if (e.charCode === 13 || e.key === 'Enter') {
+        if (e.charCode === 13 || e.key === "Enter") {
           handleRequestSearch();
-        } else if (cancelOnEscape && (e.charCode === 27 || e.key === 'Escape')) {
+        } else if (
+          cancelOnEscape &&
+          (e.charCode === 27 || e.key === "Escape")
+        ) {
           handleCancel();
         }
         if (onKeyUp) {
@@ -175,31 +180,39 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
       [handleRequestSearch, cancelOnEscape, handleCancel, onKeyUp]
     );
 
+    console.warn(classes);
+
     return (
+      // @ts-ignore
       <Paper className={classNames(classes.root, className)} style={style}>
         <IconButton
           onClick={handleRequestSearch}
+          // @ts-ignore
           className={classNames(classes.iconButton, classes.searchIconButton, {
-            [classes.iconButtonHidden]: value !== '',
+            // @ts-ignore
+            [classes.iconButtonHidden as string]: value !== "",
           })}
           disabled={disabled}
         >
           {React.cloneElement(searchIcon, {
+            // @ts-ignore
             classes: { root: classes.icon },
           })}
         </IconButton>
         <IconButton
           onClick={handleCancel}
+          // @ts-ignore
           className={classNames(classes.iconButton, {
-            [classes.iconButtonHidden]: value === '',
+            iconButtonHidden: value === "",
           })}
           disabled={disabled}
         >
           {React.cloneElement(closeIcon, {
+            // @ts-ignore
             classes: { root: classes.icon },
           })}
         </IconButton>
-        <div className={classes.searchContainer}>
+        <div className={"searchContainer"}>
           <Input
             ref={ref}
             {...inputProps}
@@ -211,6 +224,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
             onKeyUp={handleKeyUp}
             onFocus={handleFocus}
             fullWidth
+            // @ts-ignore
             className={classes.input}
             disableUnderline
             disabled={disabled}

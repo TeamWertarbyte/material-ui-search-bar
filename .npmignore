@@ -4,3 +4,11 @@ src/*
 styleguide/*
 .storybook/*
 storybook/*
+demo.gif
+LICENSE
+README.md
+rollup.config.js
+tsconfig.json
+.babelrc
+package
+*.tgz
