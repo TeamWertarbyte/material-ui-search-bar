@@ -6,3 +6,4 @@ styleguide/*
 storybook/*
 *.sh
 *.tgz
+.DS_Store

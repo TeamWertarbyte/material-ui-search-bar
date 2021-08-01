@@ -6,7 +6,6 @@ import ClearIcon from "@material-ui/icons/Clear";
 import SearchIcon from "@material-ui/icons/Search";
 import withStyles from "@material-ui/core/styles/withStyles";
 import classNames from "classnames";
-import { Theme } from "@material-ui/core/styles";
 
 //@ts-ignore
 const styles = (theme) => ({
@@ -28,77 +27,24 @@ const styles = (theme) => ({
     "& > $icon": {
       opacity: 0,
     },
-    iconButton: {
-      color: theme.palette.action.active,
-      transform: "scale(1, 1)",
-      transition: theme.transitions.create(["transform", "color"], {
-        duration: theme.transitions.duration.shorter,
-        easing: theme.transitions.easing.easeInOut,
-      }),
-    },
-    iconButtonHidden: {
-      transform: "scale(0, 0)",
-      "& > $icon": {
-        opacity: 0,
-      },
-    },
-    searchIconButton: {
-      marginRight: theme.spacing(-6),
-    },
-    icon: {
-      transition: theme.transitions.create(["opacity"], {
-        duration: theme.transitions.duration.shorter,
-        easing: theme.transitions.easing.easeInOut,
-      }),
-    },
-    input: {
-      width: "100%",
-    },
-    searchContainer: {
-      margin: "auto 16px",
-      width: `calc(100% - ${theme.spacing(6 + 4)}px)`, // 6 button + 4 margin
-    },
-  };
-};
-
-interface ISearchBarProps {
-  /** Whether to clear search on escape */
-  cancelOnEscape?: boolean;
-  /** Override or extend the styles applied to the component. */
-  classes?: {
-    root?: string;
-    iconButton?: string;
-    iconButtonHidden?: string;
-    iconButtonDisabled?: string;
-    searchIconButton?: string;
-    icon?: string;
-    input?: string;
-    searchContainer?: string;
-  };
-  /** Custom top-level class */
-  className?: string;
-  /** Override the close icon. */
-  closeIcon?: ReactElement;
-  /** Disables text field. */
-  disabled?: boolean;
-  /** Fired when the search is cancelled. */
-  onCancelSearch?: () => void;
-  /** Fired when the text value changes. */
-  onChange?: (input: string) => void;
-  /** Fired when the search icon is clicked. */
-  onRequestSearch?: (input: string) => void;
-  /** Sets placeholder text for the embedded text field. */
-  placeholder?: string;
-  /** Override the search icon. */
-  searchIcon?: ReactElement;
-  /** Override the inline-styles of the root element. */
-  style?: React.CSSProperties;
-  /** The value of the text field. */
-  value?: string;
-  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-}
+  },
+  searchIconButton: {
+    marginRight: theme.spacing(-6),
+  },
+  icon: {
+    transition: theme.transitions.create(["opacity"], {
+      duration: theme.transitions.duration.shorter,
+      easing: theme.transitions.easing.easeInOut,
+    }),
+  },
+  input: {
+    width: "100%",
+  },
+  searchContainer: {
+    margin: "auto 16px",
+    width: `calc(100% - ${theme.spacing(6 + 4)}px)`, // 6 button + 4 margin
+  },
+});
 
 interface ISearchBarProps {
   /** Whether to clear search on escape */
@@ -155,6 +101,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
       onRequestSearch,
       searchIcon = <SearchIcon />,
       style = undefined,
+      placeholder = "Search",
       ...inputProps
     },
     ref
@@ -165,36 +112,36 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
     const [value, setValue] = React.useState(inputProps.value ?? "");
 
     React.useEffect(() => {
-      setValue(inputProps.value ?? "");
+      setValue(inputProps.value);
     }, [inputProps.value]);
 
     const handleFocus = React.useCallback(
       (e) => {
-        if (onFocus) {
-          onFocus(e);
+        if (inputProps.onFocus) {
+          inputProps.onFocus(e);
         }
       },
-      [onFocus]
+      [inputProps.onFocus]
     );
 
     const handleBlur = React.useCallback(
       (e) => {
         setValue((v) => v.trim());
-        if (onBlur) {
-          onBlur(e);
+        if (inputProps.onBlur) {
+          inputProps.onBlur(e);
         }
       },
-      [onBlur]
+      [inputProps.onBlur]
     );
 
     const handleInput = React.useCallback(
       (e) => {
         setValue(e.target.value);
-        if (onChange) {
-          onChange(e.target.value);
+        if (inputProps.onChange) {
+          inputProps.onChange(e.target.value);
         }
       },
-      [onChange]
+      [inputProps.onChange]
     );
 
     const handleCancel = React.useCallback(() => {
@@ -220,11 +167,11 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
         ) {
           handleCancel();
         }
-        if (onKeyUp) {
-          onKeyUp(e);
+        if (inputProps.onKeyUp) {
+          inputProps.onKeyUp(e);
         }
       },
-      [handleRequestSearch, cancelOnEscape, handleCancel, onKeyUp]
+      [handleRequestSearch, cancelOnEscape, handleCancel, inputProps.onKeyUp]
     );
 
     React.useImperativeHandle(ref, () => ({
@@ -252,6 +199,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
             className={classes?.input}
             disableUnderline
             disabled={disabled}
+            placeholder={placeholder}
           />
         </div>
         <IconButton
@@ -280,27 +228,10 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
             classes: { root: classes?.icon },
           })}
         </IconButton>
-        <div className={"searchContainer"}>
-          <Input
-            ref={ref}
-            {...inputProps}
-            placeholder={placeholder}
-            inputRef={inputRef}
-            onBlur={handleBlur}
-            value={value}
-            onChange={handleInput}
-            onKeyUp={handleKeyUp}
-            onFocus={handleFocus}
-            fullWidth
-            // @ts-ignore
-            className={classes.input}
-            disableUnderline
-            disabled={disabled}
-          />
-        </div>
       </Paper>
     );
   }
 );
+
 
 export default withStyles(styles)(SearchBar);
