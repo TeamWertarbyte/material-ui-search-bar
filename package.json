@@ -1,5 +1,5 @@
 {
-  "name": "material-ui-search-bar",
+  "name": "mui-search-bar",
   "version": "1.0.0",
   "description": "Material UI style search bar refactored from https://www.npmjs.com/package/material-ui-search-bar using typescript and tested with jest",
   "main": "lib/index.js",
@@ -25,8 +25,11 @@
     "material",
     "material-design",
     "material-ui",
+    "mui",
     "search",
-    "react-component"
+    "react-component",
+    "tested",
+    "typescript"
   ],
   "author": "SnekCode",
   "license": "MIT",
@@ -57,8 +60,5 @@
   "dependencies": {
     "classnames": "^2.3.1",
     "prop-types": "^15.5.8"
-  },
-  "standard": {
-    "parser": "babel-eslint"
   }
 }
