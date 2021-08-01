@@ -8,3 +8,4 @@ storybook*
 *.tgz
 .DS_Store
 sb_build
+coverage

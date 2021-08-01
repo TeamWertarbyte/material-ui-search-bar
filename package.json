@@ -9,6 +9,7 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps --ignore \"**/*.test.tsx\",\"src/stories\" ",
     "test": "jest",
+    "test:ci": "npm test && codecov -f coverage/*.json",
     "lint": "eslint . --ext ts,tsx",
     "check-types": "tsc  --noEmit",
     "publish-docs": "npm run styleguide:build && npm run gh-pages",
