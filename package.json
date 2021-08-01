@@ -61,6 +61,7 @@
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
     "babel-loader": "^8.2.2",
+    "codecov": "^3.8.3",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.24.0",
     "gh-pages": "^3.2.3",
