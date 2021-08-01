@@ -10,8 +10,8 @@ module.exports = {
   ],
   collectCoverage: true,
   coveragePathIgnorePatterns: [
-    '/node_modules/',
+    '/node_modules/'
   ],
   coverageReporters: ['json', 'lcov', 'text', 'text-summary'],
-  collectCoverageFrom: ['src/**/*.{ts,tsx}'],
+  collectCoverageFrom: ['src/components/**/*.{ts,tsx}'],
 };
