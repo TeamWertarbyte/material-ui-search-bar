@@ -4,6 +4,5 @@ build
 lib
 styleguide/*
 storybook/*
-.DS_Store
 *.sh
 *.tgz
