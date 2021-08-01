@@ -4,3 +4,9 @@ src/*
 styleguide/*
 .storybook/*
 storybook/*
+demo.gif
+.babelrc
+*sh
+*tgz
+tsconfig.json
+lib/**/index.ts

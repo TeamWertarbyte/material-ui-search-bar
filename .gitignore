@@ -4,3 +4,5 @@ build
 lib
 styleguide/*
 storybook/*
+*.sh
+*.tgz
