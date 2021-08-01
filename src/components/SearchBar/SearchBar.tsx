@@ -46,7 +46,7 @@ const styles = (theme) => ({
   },
 });
 
-interface ISearchBarProps {
+export interface ISearchBarProps {
   /** Whether to clear search on escape */
   cancelOnEscape?: boolean;
   /** Override or extend the styles applied to the component. */

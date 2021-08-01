@@ -1,6 +1,6 @@
 {
   "name": "mui-search-bar",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "Material UI style search bar refactored from https://www.npmjs.com/package/material-ui-search-bar using typescript and tested with jest",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,11 +10,12 @@
     "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps",
     "lint": "eslint . --ext ts,tsx",
     "check-types": "tsc  --noEmit",
-    "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
     "publish-docs": "npm run styleguide:build && npm run gh-pages",
     "gh-pages": "./node_modules/.bin/gh-pages -d styleguide",
-    "prettier": "prettier --write \"**/*.{json,md,js}\""
+    "prettier": "prettier --write \"**/*.{json,md,js}\"",
+    "sb": "start-storybook -p 6006",
+    "build-sb": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "repository": {
     "type": "git",
@@ -47,8 +48,20 @@
     "@babel/preset-typescript": "^7.14.5",
     "@material-ui/core": ">4.0.0",
     "@material-ui/icons": ">4.0.0",
+    "@storybook/addon-actions": "^6.3.6",
+    "@storybook/addon-essentials": "^6.3.6",
+    "@storybook/addon-links": "^6.3.6",
+    "@storybook/react": "^6.3.6",
+    "@storybook/storybook-deployer": "^2.8.10",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.24.0",
     "gh-pages": "^3.2.3",
     "prettier": "^2.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
@@ -58,11 +71,7 @@
     "react-dom": "^17.0.0"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.28.5",
-    "@typescript-eslint/parser": "^4.28.5",
     "classnames": "^2.3.1",
-    "eslint": "^7.32.0",
-    "eslint-plugin-react": "^7.24.0",
     "prop-types": "^15.5.8"
   }
 }

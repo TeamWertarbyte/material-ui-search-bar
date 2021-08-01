@@ -3,7 +3,8 @@ node_modules
 build
 lib
 styleguide/*
-storybook/*
+storybook*
 *.sh
 *.tgz
 .DS_Store
+sb_build
