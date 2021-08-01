@@ -102,6 +102,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
       searchIcon = <SearchIcon />,
       style = undefined,
       placeholder = "Search",
+      value: userDefinedValue,
       ...inputProps
     },
     ref
@@ -109,11 +110,11 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
     const inputRef: React.MutableRefObject<HTMLInputElement> = React.useRef(
       {} as HTMLInputElement
     );
-    const [value, setValue] = React.useState(inputProps.value ?? "");
+    const [value, setValue] = React.useState(userDefinedValue);
 
     React.useEffect(() => {
-      setValue(inputProps.value);
-    }, [inputProps.value]);
+      setValue(userDefinedValue);
+    }, [userDefinedValue]);
 
     const handleFocus = React.useCallback(
       (e) => {
@@ -137,18 +138,14 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
     const handleInput = React.useCallback(
       (e) => {
         setValue(e.target.value);
-        if (inputProps.onChange) {
-          inputProps.onChange(e.target.value);
-        }
+        inputProps.onChange(e.target.value);
       },
       [inputProps.onChange]
     );
 
     const handleCancel = React.useCallback(() => {
       setValue("");
-      if (onCancelSearch) {
-        onCancelSearch();
-      }
+      onCancelSearch();
     }, [onCancelSearch]);
 
     const handleRequestSearch = React.useCallback(() => {
@@ -174,16 +171,6 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
       [handleRequestSearch, cancelOnEscape, handleCancel, inputProps.onKeyUp]
     );
 
-    React.useImperativeHandle(ref, () => ({
-      ...inputRef.current,
-      focus: () => {
-        inputRef.current.focus();
-      },
-      blur: () => {
-        inputRef.current.blur();
-      },
-    }));
-
     return (
       <Paper className={classNames(classes?.root, className)} style={style}>
         <div className={classes?.searchContainer}>
@@ -203,12 +190,13 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
           />
         </div>
         <IconButton
+          role="searchButton"
           onClick={handleRequestSearch}
           className={classNames(
             classes?.iconButton,
             classes?.searchIconButton,
             {
-              [classes?.iconButtonHidden ?? "iconButtonHidden"]: value !== "",
+              [classes?.iconButtonHidden as string]: value !== "",
             }
           )}
           disabled={disabled}
@@ -218,9 +206,10 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
           })}
         </IconButton>
         <IconButton
+          role="clearButton"
           onClick={handleCancel}
           className={classNames(classes?.iconButton, {
-            [classes?.iconButtonHidden ?? "iconButtonHidden"]: value === "",
+            [classes?.iconButtonHidden as string]: value === "",
           })}
           disabled={disabled}
         >
