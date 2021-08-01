@@ -105,8 +105,10 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
     },
     ref
   ) => {
-    const inputRef: React.MutableRefObject<HTMLInputElement> = React.useRef({} as HTMLInputElement);
-    const [value, setValue] = React.useState(inputProps.value??"");
+    const inputRef: React.MutableRefObject<HTMLInputElement> = React.useRef(
+      {} as HTMLInputElement
+    );
+    const [value, setValue] = React.useState(inputProps.value ?? "");
 
     React.useEffect(() => {
       setValue(inputProps.value);
@@ -200,9 +202,13 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
         </div>
         <IconButton
           onClick={handleRequestSearch}
-          className={classNames(classes?.iconButton, classes?.searchIconButton, {
-            [classes?.iconButtonHidden??'iconButtonHidden']: value !== "",
-          })}
+          className={classNames(
+            classes?.iconButton,
+            classes?.searchIconButton,
+            {
+              [classes?.iconButtonHidden ?? "iconButtonHidden"]: value !== "",
+            }
+          )}
           disabled={disabled}
         >
           {React.cloneElement(searchIcon, {
@@ -212,7 +218,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
         <IconButton
           onClick={handleCancel}
           className={classNames(classes?.iconButton, {
-            [classes?.iconButtonHidden??'iconButtonHidden']: value === "",
+            [classes?.iconButtonHidden ?? "iconButtonHidden"]: value === "",
           })}
           disabled={disabled}
         >

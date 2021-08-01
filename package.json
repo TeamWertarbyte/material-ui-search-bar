@@ -1,13 +1,13 @@
 {
   "name": "material-ui-search-bar",
   "version": "1.0.0",
-  "description": "Material style search bar",
+  "description": "Material UI style search bar refactored from https://www.npmjs.com/package/material-ui-search-bar using typescript and tested with jest",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "npm run build:types && npm run build:js",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\"",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps",
     "prepare": "babel src -d lib --copy-files",
     "check-types": "tsc  --noEmit",
     "styleguide": "styleguidist server",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TeamWertarbyte/material-ui-search-bar.git"
+    "url": "git+https://github.com/SnekCode/material-ui-search-bar.git"
   },
   "keywords": [
     "react",
@@ -28,12 +28,12 @@
     "search",
     "react-component"
   ],
-  "author": "Wertarbyte <kontakt@wertarbyte.com> (https://wertarbyte.com)",
+  "author": "SnekCode",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TeamWertarbyte/material-ui-search-bar/issues"
+    "url": "https://github.com/SnekCode/material-ui-search-bar/issues"
   },
-  "homepage": "https://github.com/TeamWertarbyte/material-ui-search-bar#readme",
+  "homepage": "https://github.com/SnekCode/material-ui-search-bar#readme",
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.0",
@@ -42,17 +42,17 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.14.5",
-    "gh-pages": "^3.2.3",
     "@material-ui/core": ">4.0.0",
     "@material-ui/icons": ">4.0.0",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.0.5",
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
     "@material-ui/core": ">4.0.0",
     "@material-ui/icons": ">4.0.0",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   },
   "dependencies": {
     "classnames": "^2.3.1",
