@@ -28,3 +28,4 @@ jobs:
 
       - name: Test
         run: npm test
+        run: codecov -f coverage/*.json
