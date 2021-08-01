@@ -16,6 +16,8 @@
         "src"
     ],
     "exclude": [
-        "src/stories"
+        "src/stories",
+        "**/*.test.ts",
+        "**/*.test.tsx"
     ]
 }
