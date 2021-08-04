@@ -1,3 +1,4 @@
+[![codecov](https://codecov.io/gh/SnekCode/material-ui-search-bar/branch/master/graph/badge.svg?token=9QWG3SY3Q3)](https://codecov.io/gh/SnekCode/material-ui-search-bar)
 # Material Search Bar
 
 ![Example](demo.gif)

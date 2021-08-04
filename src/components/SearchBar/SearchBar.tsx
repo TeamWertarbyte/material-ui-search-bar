@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { ReactElement } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
@@ -8,6 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import withStyles from "@material-ui/core/styles/withStyles";
 import classNames from "classnames";
 
+//@ts-ignore
 const styles = (theme) => ({
   root: {
     height: theme.spacing(6),
@@ -16,7 +16,7 @@ const styles = (theme) => ({
   },
   iconButton: {
     color: theme.palette.action.active,
-    transform: "scale(1, 1)",
+    // transform: "scale(1, 1)",
     transition: theme.transitions.create(["transform", "color"], {
       duration: theme.transitions.duration.shorter,
       easing: theme.transitions.easing.easeInOut,
@@ -24,12 +24,13 @@ const styles = (theme) => ({
   },
   iconButtonHidden: {
     transform: "scale(0, 0)",
+    display: "none",
     "& > $icon": {
       opacity: 0,
     },
   },
   searchIconButton: {
-    marginRight: theme.spacing(-6),
+    // marginRight: theme.spacing(-6),
   },
   icon: {
     transition: theme.transitions.create(["opacity"], {
@@ -46,32 +47,79 @@ const styles = (theme) => ({
   },
 });
 
+export interface ISearchBarProps {
+  /** Whether to clear search on escape */
+  cancelOnEscape?: boolean;
+  /** Override or extend the styles applied to the component. */
+  classes?: {
+    root?: string;
+    iconButton?: string;
+    iconButtonHidden?: string;
+    iconButtonDisabled?: string;
+    searchIconButton?: string;
+    icon?: string;
+    input?: string;
+    searchContainer?: string;
+  };
+  /** Custom top-level class */
+  className?: string;
+  /** Override the close icon. */
+  closeIcon?: ReactElement;
+  /** Disables text field. */
+  disabled?: boolean;
+  /** Fired when the search is cancelled. */
+  onCancelSearch: () => void;
+  /** Fired when the text value changes. */
+  onChange: (input: string) => void;
+  /** Fired when the search icon is clicked. */
+  onRequestSearch?: (input: string) => void;
+  /** Sets placeholder text for the embedded text field. */
+  placeholder?: string;
+  /** Override the search icon. */
+  searchIcon?: ReactElement;
+  /** Override the inline-styles of the root element. */
+  style?: React.CSSProperties;
+  /** The value of the text field. */
+  value: string;
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  searchButtonOrder?: number;
+  clearButtonOrder?: number;
+}
+
 /**
  * Material design search bar
  * @see [Search patterns](https://material.io/archive/guidelines/patterns/search.html)
  */
-const SearchBar = React.forwardRef(
+const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
   (
     {
       cancelOnEscape,
-      className,
+      className = "",
       classes,
-      closeIcon,
-      disabled,
+      closeIcon = <ClearIcon />,
+      disabled = false,
       onCancelSearch,
       onRequestSearch,
-      searchIcon,
-      style,
+      searchIcon = <SearchIcon />,
+      style = undefined,
+      placeholder = "Search",
+      value: userDefinedValue,
+      clearButtonOrder = 3,
+      searchButtonOrder = 2,
       ...inputProps
     },
     ref
   ) => {
-    const inputRef = React.useRef();
-    const [value, setValue] = React.useState(inputProps.value);
+    const inputRef: React.MutableRefObject<HTMLInputElement> = React.useRef(
+      {} as HTMLInputElement
+    );
+    const [value, setValue] = React.useState(userDefinedValue);
 
     React.useEffect(() => {
-      setValue(inputProps.value);
-    }, [inputProps.value]);
+      setValue(userDefinedValue);
+    }, [userDefinedValue]);
 
     const handleFocus = React.useCallback(
       (e) => {
@@ -95,18 +143,14 @@ const SearchBar = React.forwardRef(
     const handleInput = React.useCallback(
       (e) => {
         setValue(e.target.value);
-        if (inputProps.onChange) {
-          inputProps.onChange(e.target.value);
-        }
+        inputProps.onChange(e.target.value);
       },
       [inputProps.onChange]
     );
 
     const handleCancel = React.useCallback(() => {
       setValue("");
-      if (onCancelSearch) {
-        onCancelSearch();
-      }
+      onCancelSearch();
     }, [onCancelSearch]);
 
     const handleRequestSearch = React.useCallback(() => {
@@ -133,6 +177,7 @@ const SearchBar = React.forwardRef(
     );
 
     React.useImperativeHandle(ref, () => ({
+      ...inputRef.current,
       focus: () => {
         inputRef.current.focus();
       },
@@ -142,8 +187,11 @@ const SearchBar = React.forwardRef(
     }));
 
     return (
-      <Paper className={classNames(classes.root, className)} style={style}>
-        <div className={classes.searchContainer}>
+      <Paper
+        className={classNames(classes?.root, className)}
+        style={{ ...style }}
+      >
+        <div style={{ order: 2 }} className={classes?.searchContainer}>
           <Input
             {...inputProps}
             inputRef={inputRef}
@@ -153,31 +201,41 @@ const SearchBar = React.forwardRef(
             onKeyUp={handleKeyUp}
             onFocus={handleFocus}
             fullWidth
-            className={classes.input}
+            className={classes?.input}
             disableUnderline
             disabled={disabled}
+            placeholder={placeholder}
           />
         </div>
         <IconButton
+          role="searchButton"
           onClick={handleRequestSearch}
-          className={classNames(classes.iconButton, classes.searchIconButton, {
-            [classes.iconButtonHidden]: value !== "",
-          })}
+          className={classNames(
+            classes?.iconButton,
+            classes?.searchIconButton,
+            {
+              [classes?.iconButtonHidden as string]:
+                value !== "" && !onRequestSearch,
+            }
+          )}
           disabled={disabled}
+          style={{ order: searchButtonOrder }}
         >
           {React.cloneElement(searchIcon, {
-            classes: { root: classes.icon },
+            classes: { root: classes?.icon },
           })}
         </IconButton>
         <IconButton
+          role="clearButton"
           onClick={handleCancel}
-          className={classNames(classes.iconButton, {
-            [classes.iconButtonHidden]: value === "",
+          className={classNames(classes?.iconButton, {
+            [classes?.iconButtonHidden as string]: value === "",
           })}
           disabled={disabled}
+          style={{ order: clearButtonOrder }}
         >
           {React.cloneElement(closeIcon, {
-            classes: { root: classes.icon },
+            classes: { root: classes?.icon },
           })}
         </IconButton>
       </Paper>
@@ -185,41 +243,5 @@ const SearchBar = React.forwardRef(
   }
 );
 
-SearchBar.defaultProps = {
-  className: "",
-  closeIcon: <ClearIcon />,
-  disabled: false,
-  placeholder: "Search",
-  searchIcon: <SearchIcon />,
-  style: null,
-  value: "",
-};
-
-SearchBar.propTypes = {
-  /** Whether to clear search on escape */
-  cancelOnEscape: PropTypes.bool,
-  /** Override or extend the styles applied to the component. */
-  classes: PropTypes.object.isRequired,
-  /** Custom top-level class */
-  className: PropTypes.string,
-  /** Override the close icon. */
-  closeIcon: PropTypes.node,
-  /** Disables text field. */
-  disabled: PropTypes.bool,
-  /** Fired when the search is cancelled. */
-  onCancelSearch: PropTypes.func,
-  /** Fired when the text value changes. */
-  onChange: PropTypes.func,
-  /** Fired when the search icon is clicked. */
-  onRequestSearch: PropTypes.func,
-  /** Sets placeholder text for the embedded text field. */
-  placeholder: PropTypes.string,
-  /** Override the search icon. */
-  searchIcon: PropTypes.node,
-  /** Override the inline-styles of the root element. */
-  style: PropTypes.object,
-  /** The value of the text field. */
-  value: PropTypes.string,
-};
 
 export default withStyles(styles)(SearchBar);
