@@ -176,6 +176,16 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
       [handleRequestSearch, cancelOnEscape, handleCancel, inputProps.onKeyUp]
     );
 
+    React.useImperativeHandle(ref, () => ({
+      ...inputRef.current,
+      focus: () => {
+        inputRef.current.focus();
+      },
+      blur: () => {
+        inputRef.current.blur();
+      },
+    }));
+
     return (
       <Paper
         className={classNames(classes?.root, className)}
