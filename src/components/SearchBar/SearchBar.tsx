@@ -16,7 +16,7 @@ const styles = (theme) => ({
   },
   iconButton: {
     color: theme.palette.action.active,
-    transform: "scale(1, 1)",
+    // transform: "scale(1, 1)",
     transition: theme.transitions.create(["transform", "color"], {
       duration: theme.transitions.duration.shorter,
       easing: theme.transitions.easing.easeInOut,
@@ -24,12 +24,13 @@ const styles = (theme) => ({
   },
   iconButtonHidden: {
     transform: "scale(0, 0)",
+    display: "none",
     "& > $icon": {
       opacity: 0,
     },
   },
   searchIconButton: {
-    marginRight: theme.spacing(-6),
+    // marginRight: theme.spacing(-6),
   },
   icon: {
     transition: theme.transitions.create(["opacity"], {
@@ -51,14 +52,14 @@ export interface ISearchBarProps {
   cancelOnEscape?: boolean;
   /** Override or extend the styles applied to the component. */
   classes?: {
-    root?: string,
-    iconButton?: string,
-    iconButtonHidden?: string,
-    iconButtonDisabled?: string,
-    searchIconButton?: string,
-    icon?: string,
-    input?: string,
-    searchContainer?: string
+    root?: string;
+    iconButton?: string;
+    iconButtonHidden?: string;
+    iconButtonDisabled?: string;
+    searchIconButton?: string;
+    icon?: string;
+    input?: string;
+    searchContainer?: string;
   };
   /** Custom top-level class */
   className?: string;
@@ -83,6 +84,8 @@ export interface ISearchBarProps {
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  searchButtonOrder?: number;
+  clearButtonOrder?: number;
 }
 
 /**
@@ -103,6 +106,8 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
       style = undefined,
       placeholder = "Search",
       value: userDefinedValue,
+      clearButtonOrder = 3,
+      searchButtonOrder = 2,
       ...inputProps
     },
     ref
@@ -172,8 +177,11 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
     );
 
     return (
-      <Paper className={classNames(classes?.root, className)} style={style}>
-        <div className={classes?.searchContainer}>
+      <Paper
+        className={classNames(classes?.root, className)}
+        style={{ ...style }}
+      >
+        <div style={{ order: 2 }} className={classes?.searchContainer}>
           <Input
             {...inputProps}
             inputRef={inputRef}
@@ -196,10 +204,12 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
             classes?.iconButton,
             classes?.searchIconButton,
             {
-              [classes?.iconButtonHidden as string]: value !== "",
+              [classes?.iconButtonHidden as string]:
+                value !== "" && !onRequestSearch,
             }
           )}
           disabled={disabled}
+          style={{ order: searchButtonOrder }}
         >
           {React.cloneElement(searchIcon, {
             classes: { root: classes?.icon },
@@ -212,6 +222,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, ISearchBarProps>(
             [classes?.iconButtonHidden as string]: value === "",
           })}
           disabled={disabled}
+          style={{ order: clearButtonOrder }}
         >
           {React.cloneElement(closeIcon, {
             classes: { root: classes?.icon },
