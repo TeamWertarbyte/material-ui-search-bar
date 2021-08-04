@@ -1,6 +1,6 @@
 {
   "name": "mui-search-bar",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Material UI style search bar refactored from https://www.npmjs.com/package/material-ui-search-bar using typescript and tested with jest",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

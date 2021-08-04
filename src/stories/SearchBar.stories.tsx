@@ -161,7 +161,7 @@ const placementProps = {
 
 OptionalClickToSearch.args = {
   ...defaultProps,
-  onRequestSearch: () => null,
+  onRequestSearch: "Function to search on click",
 };
 
 OptionalClickToSearch.argTypes = {
