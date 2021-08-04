@@ -28,3 +28,6 @@ jobs:
 
       - name: Test
         run: npm run test:ci
+
+      - name: Update Git Hub Pages
+        run: npm run deploy-storybook
