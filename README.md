@@ -9,10 +9,12 @@ See this component in [action](https://teamwertarbyte.github.io/material-ui-sear
 ```shell
 npm i --save material-ui-search-bar
 ```
+Note: If you're still using Material-UI v4, please install v1.x of the search bar using `npm i --save material-ui-search-bar@^1.0.0`
 
 Note: If you're still using Material-UI v3, please install v0.x of the search bar using `npm i --save material-ui-search-bar@beta`
 
 ## Usage
+With the introduction of material-ui v5 (mui) the search bar requires you to have a `<ThemeProvider />` component of the `@mui/styles` package somewhere as a parent.
 
 The `SearchBar` is a _controlled input_, meaning that _you_ need to keep the input state. This allows for much flexibility, e.g. you can change and clear the search input just by changing its props.
 

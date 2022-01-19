@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import IconButton from "@material-ui/core/IconButton";
-import Input from "@material-ui/core/Input";
-import Paper from "@material-ui/core/Paper";
-import ClearIcon from "@material-ui/icons/Clear";
-import SearchIcon from "@material-ui/icons/Search";
-import withStyles from "@material-ui/core/styles/withStyles";
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import Paper from "@mui/material/Paper";
+import ClearIcon from "@mui/icons-material/Clear";
+import SearchIcon from "@mui/icons-material/Search";
+import withStyles from "@mui/styles/withStyles";
 import classNames from "classnames";
 
 const styles = (theme) => ({
@@ -42,7 +42,7 @@ const styles = (theme) => ({
   },
   searchContainer: {
     margin: "auto 16px",
-    width: `calc(100% - ${theme.spacing(6 + 4)}px)`, // 6 button + 4 margin
+    width: `calc(100% - ${theme.spacing(6 + 4)})`, // 6 button + 4 margin
   },
 });
 
